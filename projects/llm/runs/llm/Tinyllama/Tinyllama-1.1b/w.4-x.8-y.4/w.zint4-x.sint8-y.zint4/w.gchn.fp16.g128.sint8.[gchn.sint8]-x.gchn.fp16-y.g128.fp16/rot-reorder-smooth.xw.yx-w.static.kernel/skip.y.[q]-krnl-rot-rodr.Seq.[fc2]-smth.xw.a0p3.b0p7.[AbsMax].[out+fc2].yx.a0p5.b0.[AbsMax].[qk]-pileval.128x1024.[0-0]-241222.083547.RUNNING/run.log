@@ -1,0 +1,439 @@
+24-12-22 08:35:47 | I | === Configurations ===
+24-12-22 08:35:47 | I | LlmRunConfig(
+24-12-22 08:35:47 | I |   model=LlmModelConfig(
+24-12-22 08:35:47 | I |     name=Tinyllama-1.1b,
+24-12-22 08:35:47 | I |     path=/data/gyy/TinyLlama,
+24-12-22 08:35:47 | I |     root=/dataset/models,
+24-12-22 08:35:47 | I |     local_path=/dataset/models/Tinyllama/Tinyllama-1.1b,
+24-12-22 08:35:47 | I |     local_root=/dataset/models,
+24-12-22 08:35:47 | I |     family=Tinyllama,
+24-12-22 08:35:47 | I |     size=1.1),
+24-12-22 08:35:47 | I |   eval=LlmEvalConfig(
+24-12-22 08:35:47 | I |     num_gpus=1,
+24-12-22 08:35:47 | I |     batch_size=8,
+24-12-22 08:35:47 | I |     output_root=runs,
+24-12-22 08:35:47 | I |     output_dirname=skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0]-241222.083547,
+24-12-22 08:35:47 | I |     attach_timestamp=True,
+24-12-22 08:35:47 | I |     timestamp=241222.083547,
+24-12-22 08:35:47 | I |     output_dirname_without_timestamp=skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0],
+24-12-22 08:35:47 | I |     tasks=['wikitext'],
+24-12-22 08:35:47 | I |     max_seq_length=-4096,
+24-12-22 08:35:47 | I |     evaluator=gptq),
+24-12-22 08:35:47 | I |   calib=LlmCalibConfig(
+24-12-22 08:35:47 | I |     data=pileval,
+24-12-22 08:35:47 | I |     num_samples=128,
+24-12-22 08:35:47 | I |     cache_root=runs,
+24-12-22 08:35:47 | I |     cache_dirpath=runs/llm/cache/pileval.128x1024.[0-0],
+24-12-22 08:35:47 | I |     dataset_path=mit-han-lab/pile-val-backup,
+24-12-22 08:35:47 | I |     seq_length=1024,
+24-12-22 08:35:47 | I |     min_seq_length=0,
+24-12-22 08:35:47 | I |     max_seq_length=0,
+24-12-22 08:35:47 | I |     local_dataset_path=/dataset/pile),
+24-12-22 08:35:47 | I |   quant=LlmQuantConfig(
+24-12-22 08:35:47 | I |     wgts=WeightQuantizerConfig(
+24-12-22 08:35:47 | I |       dtype=zint4,
+24-12-22 08:35:47 | I |       group_shapes=((1, -1, -1), (1, 128, -1)),
+24-12-22 08:35:47 | I |       group_scale_dtypes=(torch.float16, sint8),
+24-12-22 08:35:47 | I |       compute_dtype=sint8,
+24-12-22 08:35:47 | I |       compute_group_level=0,
+24-12-22 08:35:47 | I |       saturate_compute_dtype=False,
+24-12-22 08:35:47 | I |       exponent_scaling_level=2,
+24-12-22 08:35:47 | I |       skips=['embed', 'head', 'router'],
+24-12-22 08:35:47 | I |       static=True,
+24-12-22 08:35:47 | I |       calib_kernel=QuantizerKernelConfig(
+24-12-22 08:35:47 | I |         _kernels={'proj_1st': QuantGPTQConfig(includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'], damp_percentage=0.01, block_size=128, num_inv_tries=250, hessian_block_size=512), 'proj_2nd': QuantGPTQConfig(includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'], damp_percentage=0.01, block_size=128, num_inv_tries=250, hessian_block_size=512), 'proj_out': QuantGPTQConfig(includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'], damp_percentage=0.01, block_size=128, num_inv_tries=250, hessian_block_size=512), 'proj_qkv': QuantGPTQConfig(includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'], damp_percentage=0.01, block_size=128, num_inv_tries=250, hessian_block_size=512)},
+24-12-22 08:35:47 | I |         gptq=QuantGPTQConfig(
+24-12-22 08:35:47 | I |           includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'],
+24-12-22 08:35:47 | I |           damp_percentage=0.01,
+24-12-22 08:35:47 | I |           block_size=128,
+24-12-22 08:35:47 | I |           num_inv_tries=250,
+24-12-22 08:35:47 | I |           hessian_block_size=512)),
+24-12-22 08:35:47 | I |       calib_range=DynamicRangeCalibConfig(
+24-12-22 08:35:47 | I |         degree=2,
+24-12-22 08:35:47 | I |         skips=[],
+24-12-22 08:35:47 | I |         objective=SearchBasedCalibObjective.OutputsError,
+24-12-22 08:35:47 | I |         strategy=SearchBasedCalibStrategy.Manual,
+24-12-22 08:35:47 | I |         granularity=SearchBasedCalibGranularity.Group,
+24-12-22 08:35:47 | I |         element_batch_size=64,
+24-12-22 08:35:47 | I |         sample_batch_size=-1,
+24-12-22 08:35:47 | I |         element_size=512,
+24-12-22 08:35:47 | I |         sample_size=-1,
+24-12-22 08:35:47 | I |         pre_reshape=True,
+24-12-22 08:35:47 | I |         outputs_device=cpu,
+24-12-22 08:35:47 | I |         allow_kernel_calib=False,
+24-12-22 08:35:47 | I |         ratio=1.0,
+24-12-22 08:35:47 | I |         max_shrink=0.2,
+24-12-22 08:35:47 | I |         max_expand=1.0,
+24-12-22 08:35:47 | I |         num_grids=80)),
+24-12-22 08:35:47 | I |     ipts=ActivationQuantizerConfig(
+24-12-22 08:35:47 | I |       dtype=sint8,
+24-12-22 08:35:47 | I |       group_shapes=((1, -1, -1),),
+24-12-22 08:35:47 | I |       group_scale_dtypes=(torch.float16,),
+24-12-22 08:35:47 | I |       compute_dtype=None,
+24-12-22 08:35:47 | I |       compute_group_level=-1,
+24-12-22 08:35:47 | I |       saturate_compute_dtype=False,
+24-12-22 08:35:47 | I |       exponent_scaling_level=1,
+24-12-22 08:35:47 | I |       skips=['embed', 'head', 'router'],
+24-12-22 08:35:47 | I |       static=False,
+24-12-22 08:35:47 | I |       calib_kernel=None,
+24-12-22 08:35:47 | I |       calib_range=None),
+24-12-22 08:35:47 | I |     opts=ActivationQuantizerConfig(
+24-12-22 08:35:47 | I |       dtype=zint4,
+24-12-22 08:35:47 | I |       group_shapes=((1, 128, -1),),
+24-12-22 08:35:47 | I |       group_scale_dtypes=(torch.float16,),
+24-12-22 08:35:47 | I |       compute_dtype=None,
+24-12-22 08:35:47 | I |       compute_group_level=-1,
+24-12-22 08:35:47 | I |       saturate_compute_dtype=False,
+24-12-22 08:35:47 | I |       exponent_scaling_level=1,
+24-12-22 08:35:47 | I |       skips=['attn_q'],
+24-12-22 08:35:47 | I |       static=False,
+24-12-22 08:35:47 | I |       calib_kernel=None,
+24-12-22 08:35:47 | I |       calib_range=None),
+24-12-22 08:35:47 | I |     rotation=QuantRotationConfig(
+24-12-22 08:35:47 | I |       random=False,
+24-12-22 08:35:47 | I |       transforms=[]),
+24-12-22 08:35:47 | I |     reorder=QuantReorderConfig(
+24-12-22 08:35:47 | I |       degree=2,
+24-12-22 08:35:47 | I |       skips=['proj_out', 'proj_qkv', 'residual'],
+24-12-22 08:35:47 | I |       objective=SearchBasedCalibObjective.OutputsError,
+24-12-22 08:35:47 | I |       strategy=SearchBasedCalibStrategy.Manual,
+24-12-22 08:35:47 | I |       granularity=SearchBasedCalibGranularity.Layer,
+24-12-22 08:35:47 | I |       element_batch_size=-1,
+24-12-22 08:35:47 | I |       sample_batch_size=-1,
+24-12-22 08:35:47 | I |       element_size=-1,
+24-12-22 08:35:47 | I |       sample_size=-1,
+24-12-22 08:35:47 | I |       pre_reshape=True,
+24-12-22 08:35:47 | I |       outputs_device=cpu,
+24-12-22 08:35:47 | I |       allow_kernel_calib=False,
+24-12-22 08:35:47 | I |       channel_metric=ChannelMetric.InputsAbsMax,
+24-12-22 08:35:47 | I |       channel_index=ChannelIndex.Sequential,
+24-12-22 08:35:47 | I |       dynamic=False),
+24-12-22 08:35:47 | I |     smooth=QuantSmoothConfig(
+24-12-22 08:35:47 | I |       xw=QuantSmoothCalibConfig(
+24-12-22 08:35:47 | I |         degree=2,
+24-12-22 08:35:47 | I |         skips=['proj_1st', 'proj_qkv'],
+24-12-22 08:35:47 | I |         objective=SearchBasedCalibObjective.OutputsError,
+24-12-22 08:35:47 | I |         strategy=SearchBasedCalibStrategy.Manual,
+24-12-22 08:35:47 | I |         granularity=SearchBasedCalibGranularity.Layer,
+24-12-22 08:35:47 | I |         element_batch_size=-1,
+24-12-22 08:35:47 | I |         sample_batch_size=-1,
+24-12-22 08:35:47 | I |         element_size=-1,
+24-12-22 08:35:47 | I |         sample_size=-1,
+24-12-22 08:35:47 | I |         pre_reshape=True,
+24-12-22 08:35:47 | I |         outputs_device=cpu,
+24-12-22 08:35:47 | I |         allow_kernel_calib=False,
+24-12-22 08:35:47 | I |         ranges=[(<RangeMode.AbsMax: 1>, <RangeMode.AbsMax: 1>)],
+24-12-22 08:35:47 | I |         x_ranges=[<RangeMode.AbsMax: 1>],
+24-12-22 08:35:47 | I |         w_ranges=[<RangeMode.AbsMax: 1>],
+24-12-22 08:35:47 | I |         alpha=0.3,
+24-12-22 08:35:47 | I |         beta=0.7,
+24-12-22 08:35:47 | I |         num_grids=20),
+24-12-22 08:35:47 | I |       yx=QuantSmoothCalibConfig(
+24-12-22 08:35:47 | I |         degree=2,
+24-12-22 08:35:47 | I |         skips=[],
+24-12-22 08:35:47 | I |         objective=SearchBasedCalibObjective.OutputsError,
+24-12-22 08:35:47 | I |         strategy=SearchBasedCalibStrategy.Manual,
+24-12-22 08:35:47 | I |         granularity=SearchBasedCalibGranularity.Layer,
+24-12-22 08:35:47 | I |         element_batch_size=-1,
+24-12-22 08:35:47 | I |         sample_batch_size=-1,
+24-12-22 08:35:47 | I |         element_size=-1,
+24-12-22 08:35:47 | I |         sample_size=-1,
+24-12-22 08:35:47 | I |         pre_reshape=True,
+24-12-22 08:35:47 | I |         outputs_device=cpu,
+24-12-22 08:35:47 | I |         allow_kernel_calib=False,
+24-12-22 08:35:47 | I |         ranges=[(<RangeMode.AbsMax: 1>, <RangeMode.AbsMax: 1>)],
+24-12-22 08:35:47 | I |         x_ranges=[<RangeMode.AbsMax: 1>],
+24-12-22 08:35:47 | I |         w_ranges=[<RangeMode.AbsMax: 1>],
+24-12-22 08:35:47 | I |         alpha=0.5,
+24-12-22 08:35:47 | I |         beta=0.0,
+24-12-22 08:35:47 | I |         num_grids=20)),
+24-12-22 08:35:47 | I |     bias_correction=False,
+24-12-22 08:35:47 | I |     post_rotary=True,
+24-12-22 08:35:47 | I |     develop_dtype=torch.float32,
+24-12-22 08:35:47 | I |     select_wgts=None,
+24-12-22 08:35:47 | I |     select_ipts=None,
+24-12-22 08:35:47 | I |     select_opts=None,
+24-12-22 08:35:47 | I |     keywords_i={'proj_qkv': ['q_proj', 'k_proj', 'v_proj'], 'proj_out': ['out_proj', 'o_proj'], 'proj_1st': ['fc1', 'up_proj', 'gate_proj', 'w1', 'w3'], 'proj_2nd': ['fc2', 'down_proj', 'w2'], 'head': ['output', 'score', 'qa_outputs'], 'embed': ['embed', 'lm_head', 'embed_out'], 'router': ['block_sparse_moe']},
+24-12-22 08:35:47 | I |     keywords_w={'proj_qkv': ['q_proj', 'k_proj', 'v_proj'], 'proj_out': ['out_proj', 'o_proj'], 'proj_1st': ['fc1', 'up_proj', 'gate_proj', 'w1', 'w3'], 'proj_2nd': ['fc2', 'down_proj', 'w2'], 'head': ['output', 'score', 'qa_outputs'], 'embed': ['embed', 'lm_head', 'embed_out'], 'router': ['block_sparse_moe.gate']},
+24-12-22 08:35:47 | I |     keywords_o={'attn_q': ['q_rotary_emb'], 'attn_k': ['k_rotary_emb'], 'attn_v': ['v_proj']},
+24-12-22 08:35:47 | I |     module_types_i=(<class 'torch.nn.modules.linear.Linear'>, <class 'transformers.models.mixtral.modeling_mixtral.MixtralSparseMoeBlock'>),
+24-12-22 08:35:47 | I |     module_types_w=(<class 'torch.nn.modules.linear.Linear'>,),
+24-12-22 08:35:47 | I |     module_types_o=(<class 'torch.nn.modules.linear.Linear'>, <class 'lmquant.llm.nn.attention.RotaryEmbedding'>),
+24-12-22 08:35:47 | I |     num_hidden_layers=-1),
+24-12-22 08:35:47 | I |   seed=12345,
+24-12-22 08:35:47 | I |   save_model=True,
+24-12-22 08:35:47 | I |   output_dirpath=runs/llm/Tinyllama/Tinyllama-1.1b/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/rot-reorder-smooth.xw.yx-w.static.kernel/skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0]-241222.083547,
+24-12-22 08:35:47 | I |   cache_dirpath=LlmQuantCachePath(rotation='runs/llm/cache/rotation/hadamard', reorder='runs/llm/cache/pileval.128x1024.[0-0]/reorder/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]', smooth='runs/llm/cache/pileval.128x1024.[0-0]/smooth/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/smooth.xw.OutputsError.Manual.Layer.d2.en1.sn1-yx.OutputsError.Manual.Layer.d2.en1.sn1/smooth.xw.[x.AbsMax.w.AbsMax]-yx.[x.AbsMax.w.AbsMax]/smooth.xw.a0p3.b0p7-yx.a0p5.b0/smooth.xw.skip.[proj_1st+proj_qkv]-yx.skip.[]', wgts='runs/llm/cache/pileval.128x1024.[0-0]/wgts/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/smooth.xw.OutputsError.Manual.Layer.d2.en1.sn1-yx.OutputsError.Manual.Layer.d2.en1.sn1/smooth.xw.[x.AbsMax.w.AbsMax]-yx.[x.AbsMax.w.AbsMax]/smooth.xw.a0p3.b0p7-yx.a0p5.b0/smooth.xw.skip.[proj_1st+proj_qkv]-yx.skip.[]/w.kernel.gptq.d0p01.b128/w.kernel.gptq.include.[proj_1st+proj_2nd+proj_out+proj_qkv]/w.range.OutputsError.Manual.Group.d2.e512.sn1/w.range.r.[1].static/w.range.skip.[]', acts=''),
+24-12-22 08:35:47 | I |   cache_path=LlmQuantCachePath(rotation='runs/llm/cache/rotation/hadamard/Tinyllama-1.1b.pt', reorder='runs/llm/cache/pileval.128x1024.[0-0]/reorder/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/Tinyllama-1.1b.pt', smooth='runs/llm/cache/pileval.128x1024.[0-0]/smooth/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/smooth.xw.OutputsError.Manual.Layer.d2.en1.sn1-yx.OutputsError.Manual.Layer.d2.en1.sn1/smooth.xw.[x.AbsMax.w.AbsMax]-yx.[x.AbsMax.w.AbsMax]/smooth.xw.a0p3.b0p7-yx.a0p5.b0/smooth.xw.skip.[proj_1st+proj_qkv]-yx.skip.[]/Tinyllama-1.1b.pt', wgts='runs/llm/cache/pileval.128x1024.[0-0]/wgts/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/smooth.xw.OutputsError.Manual.Layer.d2.en1.sn1-yx.OutputsError.Manual.Layer.d2.en1.sn1/smooth.xw.[x.AbsMax.w.AbsMax]-yx.[x.AbsMax.w.AbsMax]/smooth.xw.a0p3.b0p7-yx.a0p5.b0/smooth.xw.skip.[proj_1st+proj_qkv]-yx.skip.[]/w.kernel.gptq.d0p01.b128/w.kernel.gptq.include.[proj_1st+proj_2nd+proj_out+proj_qkv]/w.range.OutputsError.Manual.Group.d2.e512.sn1/w.range.r.[1].static/w.range.skip.[]/Tinyllama-1.1b.pt', acts=''),
+24-12-22 08:35:47 | I |   fairseq_args=/data/gyy/lmquant-main/projects/llm/configs/fairseq_args.json,
+24-12-22 08:35:47 | I |   gen_teacher_opts=False,
+24-12-22 08:35:47 | I |   enable_cache=False,
+24-12-22 08:35:47 | I |   with_prepocess=False)
+24-12-22 08:35:47 | I | === Dumped Configurations ===
+24-12-22 08:35:47 | I | { 'calib': { 'cache_root': 'runs',
+24-12-22 08:35:47 | I |              'data': 'pileval',
+24-12-22 08:35:47 | I |              'dataset_path': 'mit-han-lab/pile-val-backup',
+24-12-22 08:35:47 | I |              'local_dataset_path': '/dataset/pile',
+24-12-22 08:35:47 | I |              'max_seq_length': 0,
+24-12-22 08:35:47 | I |              'min_seq_length': 0,
+24-12-22 08:35:47 | I |              'num_samples': 128,
+24-12-22 08:35:47 | I |              'seq_length': 1024},
+24-12-22 08:35:47 | I |   'enable_cache': False,
+24-12-22 08:35:47 | I |   'eval': { 'attach_timestamp': True,
+24-12-22 08:35:47 | I |             'batch_size': 8,
+24-12-22 08:35:47 | I |             'evaluator': 'gptq',
+24-12-22 08:35:47 | I |             'max_seq_length': -4096,
+24-12-22 08:35:47 | I |             'num_gpus': 1,
+24-12-22 08:35:47 | I |             'output_dirname': 'skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0]-241222.083547',
+24-12-22 08:35:47 | I |             'output_root': 'runs',
+24-12-22 08:35:47 | I |             'tasks': ['wikitext']},
+24-12-22 08:35:47 | I |   'fairseq_args': '/data/gyy/lmquant-main/projects/llm/configs/fairseq_args.json',
+24-12-22 08:35:47 | I |   'gen_teacher_opts': False,
+24-12-22 08:35:47 | I |   'model': { 'local_path': '/dataset/models/Tinyllama/Tinyllama-1.1b',
+24-12-22 08:35:47 | I |              'local_root': '/dataset/models',
+24-12-22 08:35:47 | I |              'name': 'Tinyllama-1.1b',
+24-12-22 08:35:47 | I |              'path': '/data/gyy/TinyLlama',
+24-12-22 08:35:47 | I |              'root': '/dataset/models'},
+24-12-22 08:35:47 | I |   'quant': { 'bias_correction': False,
+24-12-22 08:35:47 | I |              'develop_dtype': 'torch.float32',
+24-12-22 08:35:47 | I |              'enable_reorder': True,
+24-12-22 08:35:47 | I |              'enable_rotation': True,
+24-12-22 08:35:47 | I |              'enable_select_ipts': False,
+24-12-22 08:35:47 | I |              'enable_select_opts': False,
+24-12-22 08:35:47 | I |              'enable_select_wgts': False,
+24-12-22 08:35:47 | I |              'enable_smooth': True,
+24-12-22 08:35:47 | I |              'ipts': { 'compute_dtype': None,
+24-12-22 08:35:47 | I |                        'compute_group_level': -1,
+24-12-22 08:35:47 | I |                        'dtype': 'sint8',
+24-12-22 08:35:47 | I |                        'enable_calib_range': False,
+24-12-22 08:35:47 | I |                        'group_scale_dtypes': ['torch.float16'],
+24-12-22 08:35:47 | I |                        'group_shapes': [[1, -1, -1]],
+24-12-22 08:35:47 | I |                        'saturate_compute_dtype': False,
+24-12-22 08:35:47 | I |                        'skips': ['embed', 'head', 'router'],
+24-12-22 08:35:47 | I |                        'static': False},
+24-12-22 08:35:47 | I |              'opts': { 'compute_dtype': None,
+24-12-22 08:35:47 | I |                        'compute_group_level': -1,
+24-12-22 08:35:47 | I |                        'dtype': 'zint4',
+24-12-22 08:35:47 | I |                        'enable_calib_range': False,
+24-12-22 08:35:47 | I |                        'group_scale_dtypes': ['torch.float16'],
+24-12-22 08:35:47 | I |                        'group_shapes': [[1, 128, -1]],
+24-12-22 08:35:47 | I |                        'saturate_compute_dtype': False,
+24-12-22 08:35:47 | I |                        'skips': ['attn_q'],
+24-12-22 08:35:47 | I |                        'static': False},
+24-12-22 08:35:47 | I |              'post_rotary': True,
+24-12-22 08:35:47 | I |              'reorder': { 'allow_kernel_calib': False,
+24-12-22 08:35:47 | I |                           'channel_index': 'Sequential',
+24-12-22 08:35:47 | I |                           'channel_metric': 'InputsAbsMax',
+24-12-22 08:35:47 | I |                           'degree': 2,
+24-12-22 08:35:47 | I |                           'dynamic': False,
+24-12-22 08:35:47 | I |                           'element_batch_size': -1,
+24-12-22 08:35:47 | I |                           'element_size': -1,
+24-12-22 08:35:47 | I |                           'outputs_device': 'cpu',
+24-12-22 08:35:47 | I |                           'pre_reshape': True,
+24-12-22 08:35:47 | I |                           'sample_batch_size': -1,
+24-12-22 08:35:47 | I |                           'sample_size': -1,
+24-12-22 08:35:47 | I |                           'skips': ['proj_out', 'proj_qkv', 'residual'],
+24-12-22 08:35:47 | I |                           'strategy': 'Manual'},
+24-12-22 08:35:47 | I |              'rotation': {'random': False, 'transforms': []},
+24-12-22 08:35:47 | I |              'smooth': { 'enable_xw': True,
+24-12-22 08:35:47 | I |                          'enable_yx': True,
+24-12-22 08:35:47 | I |                          'xw': { 'allow_kernel_calib': False,
+24-12-22 08:35:47 | I |                                  'alpha': 0.3,
+24-12-22 08:35:47 | I |                                  'beta': 0.7,
+24-12-22 08:35:47 | I |                                  'degree': 2,
+24-12-22 08:35:47 | I |                                  'element_batch_size': -1,
+24-12-22 08:35:47 | I |                                  'element_size': -1,
+24-12-22 08:35:47 | I |                                  'granularity': 'Layer',
+24-12-22 08:35:47 | I |                                  'num_grids': 20,
+24-12-22 08:35:47 | I |                                  'objective': 'OutputsError',
+24-12-22 08:35:47 | I |                                  'outputs_device': 'cpu',
+24-12-22 08:35:47 | I |                                  'pre_reshape': True,
+24-12-22 08:35:47 | I |                                  'ranges': [['AbsMax', 'AbsMax']],
+24-12-22 08:35:47 | I |                                  'sample_batch_size': -1,
+24-12-22 08:35:47 | I |                                  'sample_size': -1,
+24-12-22 08:35:47 | I |                                  'skips': ['proj_1st', 'proj_qkv'],
+24-12-22 08:35:47 | I |                                  'strategy': 'Manual'},
+24-12-22 08:35:47 | I |                          'yx': { 'allow_kernel_calib': False,
+24-12-22 08:35:47 | I |                                  'alpha': 0.5,
+24-12-22 08:35:47 | I |                                  'beta': 0.0,
+24-12-22 08:35:47 | I |                                  'degree': 2,
+24-12-22 08:35:47 | I |                                  'element_batch_size': -1,
+24-12-22 08:35:47 | I |                                  'element_size': -1,
+24-12-22 08:35:47 | I |                                  'granularity': 'Layer',
+24-12-22 08:35:47 | I |                                  'num_grids': 20,
+24-12-22 08:35:47 | I |                                  'objective': 'OutputsError',
+24-12-22 08:35:47 | I |                                  'outputs_device': 'cpu',
+24-12-22 08:35:47 | I |                                  'pre_reshape': True,
+24-12-22 08:35:47 | I |                                  'ranges': [['AbsMax', 'AbsMax']],
+24-12-22 08:35:47 | I |                                  'sample_batch_size': -1,
+24-12-22 08:35:47 | I |                                  'sample_size': -1,
+24-12-22 08:35:47 | I |                                  'skips': [],
+24-12-22 08:35:47 | I |                                  'strategy': 'Manual'}},
+24-12-22 08:35:47 | I |              'wgts': { 'calib_kernel': { 'enable_gptq': True,
+24-12-22 08:35:47 | I |                                          'gptq': { 'block_size': 128,
+24-12-22 08:35:47 | I |                                                    'damp_percentage': 0.01,
+24-12-22 08:35:47 | I |                                                    'hessian_block_size': 512,
+24-12-22 08:35:47 | I |                                                    'includes': ['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'],
+24-12-22 08:35:47 | I |                                                    'num_inv_tries': 250}},
+24-12-22 08:35:47 | I |                        'calib_range': { 'allow_kernel_calib': False,
+24-12-22 08:35:47 | I |                                         'degree': 2,
+24-12-22 08:35:47 | I |                                         'element_batch_size': 64,
+24-12-22 08:35:47 | I |                                         'element_size': 512,
+24-12-22 08:35:47 | I |                                         'granularity': 'Group',
+24-12-22 08:35:47 | I |                                         'max_expand': 1.0,
+24-12-22 08:35:47 | I |                                         'max_shrink': 0.2,
+24-12-22 08:35:47 | I |                                         'num_grids': 80,
+24-12-22 08:35:47 | I |                                         'objective': 'OutputsError',
+24-12-22 08:35:47 | I |                                         'outputs_device': 'cpu',
+24-12-22 08:35:47 | I |                                         'pre_reshape': True,
+24-12-22 08:35:47 | I |                                         'ratio': 1.0,
+24-12-22 08:35:47 | I |                                         'sample_batch_size': -1,
+24-12-22 08:35:47 | I |                                         'sample_size': -1,
+24-12-22 08:35:47 | I |                                         'skips': [],
+24-12-22 08:35:47 | I |                                         'strategy': 'Manual'},
+24-12-22 08:35:47 | I |                        'compute_dtype': 'sint8',
+24-12-22 08:35:47 | I |                        'compute_group_level': 0,
+24-12-22 08:35:47 | I |                        'dtype': 'zint4',
+24-12-22 08:35:47 | I |                        'enable_calib_kernel': True,
+24-12-22 08:35:47 | I |                        'enable_calib_range': True,
+24-12-22 08:35:47 | I |                        'group_scale_dtypes': ['torch.float16', 'sint8'],
+24-12-22 08:35:47 | I |                        'group_shapes': [[1, -1, -1], [1, 128, -1]],
+24-12-22 08:35:47 | I |                        'saturate_compute_dtype': False,
+24-12-22 08:35:47 | I |                        'skips': ['embed', 'head', 'router']}},
+24-12-22 08:35:47 | I |   'save_model': True,
+24-12-22 08:35:47 | I |   'seed': 12345,
+24-12-22 08:35:47 | I |   'with_prepocess': False}
+24-12-22 08:35:47 | I | === Output Directory ===
+24-12-22 08:35:47 | I | runs/llm/Tinyllama/Tinyllama-1.1b/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/rot-reorder-smooth.xw.yx-w.static.kernel/skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0]-241222.083547
+24-12-22 08:35:47 | I | === Start Evaluating ===
+24-12-22 08:35:47 | I | * Building model Tinyllama-1.1b from /data/gyy/TinyLlama
+24-12-22 08:35:48 | I | We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.0.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.1.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.2.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.3.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.4.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.5.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.6.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.7.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.8.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.9.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.10.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.11.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.12.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.13.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.14.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.15.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.16.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.17.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.18.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.19.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.20.self_attn
+24-12-22 08:35:49 | I | - Patching LlamaSdpaAttention.forward in model.layers.21.self_attn
+24-12-22 08:35:49 | I | * Development dtype is torch.float32
+24-12-22 08:35:49 | I |   * Begin to QAT
+24-12-22 08:35:50 | D | Setting JobRuntime:name=UNKNOWN_NAME
+24-12-22 08:35:50 | D | Setting JobRuntime:name=utils
+24-12-22 08:35:55 | I | distributed init (rank 0): env://
+24-12-22 08:35:55 | I | initialized host 3fb0cc53fbf9 as rank 0
+24-12-22 08:35:56 | I | nvidia-smi stats: {'gpu_0_mem_used_gb': 0.0, 'gpu_1_mem_used_gb': 0.0, 'gpu_2_mem_used_gb': 0.001953125, 'gpu_3_mem_used_gb': 0.0, 'gpu_4_mem_used_gb': 10.134765625, 'gpu_5_mem_used_gb': 0.0, 'gpu_6_mem_used_gb': 2.521484375, 'gpu_7_mem_used_gb': 0.001953125}
+24-12-22 08:35:56 | I | {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 1, 'log_format': 'simple', 'log_file': None, 'tensorboard_logdir': None, 'wandb_project': 'layer_wise_quant', 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': True, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'user_dir': None, 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma', 'log_nvidia_smi': False}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None, 'is_moe': False, 'is_model_parallel': False}, 'distributed_training': {'_name': None, 'distributed_world_size': 1, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'env://', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': True, 'ddp_backend': 'pytorch_ddp', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_algorithm': 'LocalSGD', 'localsgd_frequency': 3, 'nprocs_per_node': 1, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'zero_group_size': -1, 'save_zero_ckpt_fast': False, 'fp16': True, 'memory_efficient_fp16': True, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'use_sharded_state': False}, 'dataset': {'_name': None, 'num_workers': 1, 'num_workers_valid': 0, 'skip_invalid_size_inputs_valid_test': False, 'max_tokens': None, 'batch_size': 32, 'required_batch_size_multiple': 8, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'combine_valid_subsets': None, 'ignore_unused_valid_subsets': False, 'validate_interval': 1, 'validate_interval_updates': 20, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': False, 'max_tokens_valid': None, 'batch_size_valid': 32, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 100, 'stop_time_hours': 0.0, 'clip_norm': 2.0, 'sentence_avg': False, 'update_freq': [2], 'lr': [0.00015], 'stop_min_lr': -1.0, 'use_bmuf': False}, 'checkpoint': {'_name': None, 'save_dir': 'checkpoints', 'restore_file': 'checkpoint_last.pt', 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 1000, 'keep_interval_updates': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': True, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_best_checkpoints': False, 'no_save_optimizer_state': False, 'no_save_optimizer_state_on_training_finished': False, 'symlink_best_and_last_checkpoints': False, 'best_checkpoint_metric': 'loss_valid', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': False, 'write_checkpoints_asynchronously': False, 's3_upload_path': None, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 1}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'input_quant_method': '', 'input_bits': -1, 'weight_quant_method': '', 'weight_bits': -1, 'smoothquant': False, 'smoothquant_alpha': 0.5, 'smoothquant_bitnet': False, 'input_bits_post': 8, 'hadamard_group': -1, 'cal_input_stat': 'none', 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807, 'stats_path': None, 'max_valid_steps': None}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': {'_name': 'tiny_llama', 'load_ckpt': None, 'batch_size': 32, 'share_input_output_embed': False, 'sliding_window': None, 'rope_theta': 10000.0, 'checkpoint_activations': False, 'tokens_per_sample': 512, 'model_parallel_size': 1}, 'task': {'_name': 'kd', 'path_to_labels': None, 'data': '/data/gyy/YOCO/data_without_preprocess', 'tokens_per_sample': 512, 'batch_size_in_quant': 8, 'max_target_positions': None, 'llama_model': None, 'quant_acts_when_training': True, 'tiktoken_model': 'cl100k_base', 'batch_read_ahead': 1, 'pad_to_max_len': True, 'absolute_path': False, 'tokenizer_pad_to_multiple': 1, 'seed': 1, 'batch_size': 32}, 'criterion': {'_name': 'kl_divergence', 'sentence_avg': False}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9, 0.95)', 'adam_eps': 1e-06, 'weight_decay': 0.05, 'use_old_adam': False, 'fp16_adam_stats': False, 'tpu': False, 'bf16': False, 'lr': [0.00015], 'block_wise': False}, 'lr_scheduler': {'_name': 'polynomial_decay', 'warmup_updates': 50, 'force_anneal': None, 'end_learning_rate': 0.0, 'power': 1.0, 'total_num_update': 300000.0, 'lr': [0.00015]}, 'scoring': {'_name': 'bleu', 'pad': 1, 'eos': 2, 'unk': 3}, 'bpe': None, 'tokenizer': None}
+24-12-22 08:35:56 | I | LlamaModelDecoderLayer(
+  (decoder): LlamaDecoderLayerInFairseq(
+    (model): LlamaDecoderLayer(
+      (self_attn): LlamaSdpaAttention(
+        (q_proj): Linear(in_features=2048, out_features=2048, bias=False)
+        (k_proj): Linear(in_features=2048, out_features=256, bias=False)
+        (v_proj): Linear(in_features=2048, out_features=256, bias=False)
+        (o_proj): Linear(in_features=2048, out_features=2048, bias=False)
+        (rotary_emb): LlamaRotaryEmbedding()
+        (q_rotary_emb): RotaryEmbedding()
+        (k_rotary_emb): RotaryEmbedding()
+      )
+      (mlp): LlamaMLP(
+        (gate_proj): Linear(in_features=2048, out_features=5632, bias=False)
+        (up_proj): Linear(in_features=2048, out_features=5632, bias=False)
+        (down_proj): Linear(in_features=5632, out_features=2048, bias=False)
+        (act_fn): SiLU()
+      )
+      (input_layernorm): LlamaRMSNorm((2048,), eps=1e-05)
+      (post_attention_layernorm): LlamaRMSNorm((2048,), eps=1e-05)
+    )
+  )
+  (model): LlamaDecoderLayerInFairseq(
+    (model): LlamaDecoderLayer(
+      (self_attn): LlamaSdpaAttention(
+        (q_proj): Linear(in_features=2048, out_features=2048, bias=False)
+        (k_proj): Linear(in_features=2048, out_features=256, bias=False)
+        (v_proj): Linear(in_features=2048, out_features=256, bias=False)
+        (o_proj): Linear(in_features=2048, out_features=2048, bias=False)
+        (rotary_emb): LlamaRotaryEmbedding()
+        (q_rotary_emb): RotaryEmbedding()
+        (k_rotary_emb): RotaryEmbedding()
+      )
+      (mlp): LlamaMLP(
+        (gate_proj): Linear(in_features=2048, out_features=5632, bias=False)
+        (up_proj): Linear(in_features=2048, out_features=5632, bias=False)
+        (down_proj): Linear(in_features=5632, out_features=2048, bias=False)
+        (act_fn): SiLU()
+      )
+      (input_layernorm): LlamaRMSNorm((2048,), eps=1e-05)
+      (post_attention_layernorm): LlamaRMSNorm((2048,), eps=1e-05)
+    )
+  )
+)
+24-12-22 08:35:56 | I | task: KDTask
+24-12-22 08:35:56 | I | model: LlamaModelDecoderLayer
+24-12-22 08:35:56 | I | criterion: KLDivergenceCriterion
+24-12-22 08:35:56 | I | num. non-expert model params: 44,044,288 (num. trained: 44,044,288)
+24-12-22 08:35:56 | I | num. expert model params: 0 (num. trained: 0)
+24-12-22 08:35:56 | I | nvidia-smi stats: {'gpu_0_mem_used_gb': 0.0, 'gpu_1_mem_used_gb': 0.0, 'gpu_2_mem_used_gb': 0.001953125, 'gpu_3_mem_used_gb': 0.0, 'gpu_4_mem_used_gb': 10.134765625, 'gpu_5_mem_used_gb': 0.0, 'gpu_6_mem_used_gb': 4.658203125, 'gpu_7_mem_used_gb': 0.001953125}
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.weight <- model.model.self_attn.q_proj.weight
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- decoder.model.self_attn.k_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- decoder.model.self_attn.v_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- decoder.model.self_attn.o_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- decoder.model.mlp.gate_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- decoder.model.mlp.up_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- decoder.model.mlp.down_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.self_attn.q_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.self_attn.k_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.self_attn.v_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.self_attn.o_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.mlp.gate_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.mlp.up_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.mlp.down_proj.bias
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.k_proj.weight <- model.model.self_attn.k_proj.weight
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.v_proj.weight <- model.model.self_attn.v_proj.weight
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.self_attn.o_proj.weight <- model.model.self_attn.o_proj.weight
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.mlp.gate_proj.weight <- model.model.mlp.gate_proj.weight
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.mlp.up_proj.weight <- model.model.mlp.up_proj.weight
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.mlp.down_proj.weight <- model.model.mlp.down_proj.weight
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.input_layernorm.weight <- model.model.input_layernorm.weight
+24-12-22 08:35:56 | I | detected shared parameter: decoder.model.post_attention_layernorm.weight <- model.model.post_attention_layernorm.weight
+24-12-22 08:35:56 | I | nvidia-smi stats: {'gpu_0_mem_used_gb': 0.0, 'gpu_1_mem_used_gb': 0.0, 'gpu_2_mem_used_gb': 0.001953125, 'gpu_3_mem_used_gb': 0.0, 'gpu_4_mem_used_gb': 10.134765625, 'gpu_5_mem_used_gb': 0.0, 'gpu_6_mem_used_gb': 4.69921875, 'gpu_7_mem_used_gb': 0.001953125}
+24-12-22 08:35:56 | I | ***********************CUDA enviroments for all 1 workers***********************
+24-12-22 08:35:56 | I | rank   0: capabilities =  8.6  ; total memory = 23.691 GB ; name = NVIDIA GeForce RTX 3090                 
+24-12-22 08:35:56 | I | ***********************CUDA enviroments for all 1 workers***********************
+24-12-22 08:35:56 | I | training on 1 devices (GPUs/TPUs)
+24-12-22 08:35:56 | I | max tokens per GPU = None and batch size per GPU = 32
+24-12-22 08:35:56 | I | nvidia-smi stats: {'gpu_0_mem_used_gb': 0.0, 'gpu_1_mem_used_gb': 0.0, 'gpu_2_mem_used_gb': 0.001953125, 'gpu_3_mem_used_gb': 0.0, 'gpu_4_mem_used_gb': 10.134765625, 'gpu_5_mem_used_gb': 0.0, 'gpu_6_mem_used_gb': 4.69921875, 'gpu_7_mem_used_gb': 0.001953125}
+24-12-22 08:35:56 | I | loading train data for epoch 1
+24-12-22 08:35:56 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/less_data/0.jsonl 
+ ***
+24-12-22 08:35:56 | I | *** 
+ total_rows = 30 
+ ***
+24-12-22 08:35:56 | I | current row num = 0
+24-12-22 08:35:56 | I | in forward_and_gen_teacher_outputs, Start iterating over samples
+24-12-22 08:35:57 | I | loading train data for epoch 1
+24-12-22 08:35:57 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/less_data/0.jsonl 
+ ***
+24-12-22 08:35:57 | I | *** 
+ total_rows = 30 
+ ***
+24-12-22 08:35:57 | I | current row num = 0
+24-12-22 08:35:57 | I | in forward_and_gen_args_and_kwargs, Start iterating over samples
+24-12-22 08:35:57 | I | No existing checkpoint found checkpoints/checkpoint_last.pt
+24-12-22 08:35:57 | I | loading train data for epoch 1

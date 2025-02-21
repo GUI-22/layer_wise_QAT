@@ -1,0 +1,744 @@
+25-01-12 11:53:25 | I | === Configurations ===
+25-01-12 11:53:25 | I | LlmRunConfig(
+25-01-12 11:53:25 | I |   model=LlmModelConfig(
+25-01-12 11:53:25 | I |     name=tiny-llama-1.1b,
+25-01-12 11:53:25 | I |     path=/data/gyy/TinyLlama,
+25-01-12 11:53:25 | I |     root=/dataset/models,
+25-01-12 11:53:25 | I |     local_path=/dataset/models/tiny/tiny-llama-1.1b,
+25-01-12 11:53:25 | I |     local_root=/dataset/models,
+25-01-12 11:53:25 | I |     family=tiny,
+25-01-12 11:53:25 | I |     size=1.1),
+25-01-12 11:53:25 | I |   eval=LlmEvalConfig(
+25-01-12 11:53:25 | I |     num_gpus=4,
+25-01-12 11:53:25 | I |     batch_size=8,
+25-01-12 11:53:25 | I |     output_root=runs,
+25-01-12 11:53:25 | I |     output_dirname=skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0]-250112.115325,
+25-01-12 11:53:25 | I |     attach_timestamp=True,
+25-01-12 11:53:25 | I |     timestamp=250112.115325,
+25-01-12 11:53:25 | I |     output_dirname_without_timestamp=skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0],
+25-01-12 11:53:25 | I |     tasks=['wikitext'],
+25-01-12 11:53:25 | I |     max_seq_length=-4096,
+25-01-12 11:53:25 | I |     evaluator=gptq),
+25-01-12 11:53:25 | I |   calib=LlmCalibConfig(
+25-01-12 11:53:25 | I |     data=pileval,
+25-01-12 11:53:25 | I |     num_samples=128,
+25-01-12 11:53:25 | I |     cache_root=runs,
+25-01-12 11:53:25 | I |     cache_dirpath=runs/llm/cache/pileval.128x1024.[0-0],
+25-01-12 11:53:25 | I |     dataset_path=mit-han-lab/pile-val-backup,
+25-01-12 11:53:25 | I |     seq_length=1024,
+25-01-12 11:53:25 | I |     min_seq_length=0,
+25-01-12 11:53:25 | I |     max_seq_length=0,
+25-01-12 11:53:25 | I |     local_dataset_path=/dataset/pile),
+25-01-12 11:53:25 | I |   quant=LlmQuantConfig(
+25-01-12 11:53:25 | I |     wgts=WeightQuantizerConfig(
+25-01-12 11:53:25 | I |       dtype=zint4,
+25-01-12 11:53:25 | I |       group_shapes=((1, -1, -1), (1, 128, -1)),
+25-01-12 11:53:25 | I |       group_scale_dtypes=(torch.float16, sint8),
+25-01-12 11:53:25 | I |       compute_dtype=sint8,
+25-01-12 11:53:25 | I |       compute_group_level=0,
+25-01-12 11:53:25 | I |       saturate_compute_dtype=False,
+25-01-12 11:53:25 | I |       exponent_scaling_level=2,
+25-01-12 11:53:25 | I |       skips=['embed', 'head', 'router'],
+25-01-12 11:53:25 | I |       static=True,
+25-01-12 11:53:25 | I |       calib_kernel=QuantizerKernelConfig(
+25-01-12 11:53:25 | I |         _kernels={'proj_1st': QuantGPTQConfig(includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'], damp_percentage=0.01, block_size=128, num_inv_tries=250, hessian_block_size=512), 'proj_2nd': QuantGPTQConfig(includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'], damp_percentage=0.01, block_size=128, num_inv_tries=250, hessian_block_size=512), 'proj_out': QuantGPTQConfig(includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'], damp_percentage=0.01, block_size=128, num_inv_tries=250, hessian_block_size=512), 'proj_qkv': QuantGPTQConfig(includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'], damp_percentage=0.01, block_size=128, num_inv_tries=250, hessian_block_size=512)},
+25-01-12 11:53:25 | I |         gptq=QuantGPTQConfig(
+25-01-12 11:53:25 | I |           includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'],
+25-01-12 11:53:25 | I |           damp_percentage=0.01,
+25-01-12 11:53:25 | I |           block_size=128,
+25-01-12 11:53:25 | I |           num_inv_tries=250,
+25-01-12 11:53:25 | I |           hessian_block_size=512)),
+25-01-12 11:53:25 | I |       calib_range=DynamicRangeCalibConfig(
+25-01-12 11:53:25 | I |         degree=2,
+25-01-12 11:53:25 | I |         skips=[],
+25-01-12 11:53:25 | I |         objective=SearchBasedCalibObjective.OutputsError,
+25-01-12 11:53:25 | I |         strategy=SearchBasedCalibStrategy.Manual,
+25-01-12 11:53:25 | I |         granularity=SearchBasedCalibGranularity.Group,
+25-01-12 11:53:25 | I |         element_batch_size=64,
+25-01-12 11:53:25 | I |         sample_batch_size=-1,
+25-01-12 11:53:25 | I |         element_size=512,
+25-01-12 11:53:25 | I |         sample_size=-1,
+25-01-12 11:53:25 | I |         pre_reshape=True,
+25-01-12 11:53:25 | I |         outputs_device=cpu,
+25-01-12 11:53:25 | I |         allow_kernel_calib=False,
+25-01-12 11:53:25 | I |         ratio=1.0,
+25-01-12 11:53:25 | I |         max_shrink=0.2,
+25-01-12 11:53:25 | I |         max_expand=1.0,
+25-01-12 11:53:25 | I |         num_grids=80)),
+25-01-12 11:53:25 | I |     ipts=ActivationQuantizerConfig(
+25-01-12 11:53:25 | I |       dtype=sint8,
+25-01-12 11:53:25 | I |       group_shapes=((1, -1, -1),),
+25-01-12 11:53:25 | I |       group_scale_dtypes=(torch.float16,),
+25-01-12 11:53:25 | I |       compute_dtype=None,
+25-01-12 11:53:25 | I |       compute_group_level=-1,
+25-01-12 11:53:25 | I |       saturate_compute_dtype=False,
+25-01-12 11:53:25 | I |       exponent_scaling_level=1,
+25-01-12 11:53:25 | I |       skips=['embed', 'head', 'router'],
+25-01-12 11:53:25 | I |       static=False,
+25-01-12 11:53:25 | I |       calib_kernel=None,
+25-01-12 11:53:25 | I |       calib_range=None),
+25-01-12 11:53:25 | I |     opts=ActivationQuantizerConfig(
+25-01-12 11:53:25 | I |       dtype=zint4,
+25-01-12 11:53:25 | I |       group_shapes=((1, 128, -1),),
+25-01-12 11:53:25 | I |       group_scale_dtypes=(torch.float16,),
+25-01-12 11:53:25 | I |       compute_dtype=None,
+25-01-12 11:53:25 | I |       compute_group_level=-1,
+25-01-12 11:53:25 | I |       saturate_compute_dtype=False,
+25-01-12 11:53:25 | I |       exponent_scaling_level=1,
+25-01-12 11:53:25 | I |       skips=['attn_q'],
+25-01-12 11:53:25 | I |       static=False,
+25-01-12 11:53:25 | I |       calib_kernel=None,
+25-01-12 11:53:25 | I |       calib_range=None),
+25-01-12 11:53:25 | I |     rotation=QuantRotationConfig(
+25-01-12 11:53:25 | I |       random=False,
+25-01-12 11:53:25 | I |       transforms=[]),
+25-01-12 11:53:25 | I |     reorder=QuantReorderConfig(
+25-01-12 11:53:25 | I |       degree=2,
+25-01-12 11:53:25 | I |       skips=['proj_out', 'proj_qkv', 'residual'],
+25-01-12 11:53:25 | I |       objective=SearchBasedCalibObjective.OutputsError,
+25-01-12 11:53:25 | I |       strategy=SearchBasedCalibStrategy.Manual,
+25-01-12 11:53:25 | I |       granularity=SearchBasedCalibGranularity.Layer,
+25-01-12 11:53:25 | I |       element_batch_size=-1,
+25-01-12 11:53:25 | I |       sample_batch_size=-1,
+25-01-12 11:53:25 | I |       element_size=-1,
+25-01-12 11:53:25 | I |       sample_size=-1,
+25-01-12 11:53:25 | I |       pre_reshape=True,
+25-01-12 11:53:25 | I |       outputs_device=cpu,
+25-01-12 11:53:25 | I |       allow_kernel_calib=False,
+25-01-12 11:53:25 | I |       channel_metric=ChannelMetric.InputsAbsMax,
+25-01-12 11:53:25 | I |       channel_index=ChannelIndex.Sequential,
+25-01-12 11:53:25 | I |       dynamic=False),
+25-01-12 11:53:25 | I |     smooth=QuantSmoothConfig(
+25-01-12 11:53:25 | I |       xw=QuantSmoothCalibConfig(
+25-01-12 11:53:25 | I |         degree=2,
+25-01-12 11:53:25 | I |         skips=['proj_1st', 'proj_qkv'],
+25-01-12 11:53:25 | I |         objective=SearchBasedCalibObjective.OutputsError,
+25-01-12 11:53:25 | I |         strategy=SearchBasedCalibStrategy.Manual,
+25-01-12 11:53:25 | I |         granularity=SearchBasedCalibGranularity.Layer,
+25-01-12 11:53:25 | I |         element_batch_size=-1,
+25-01-12 11:53:25 | I |         sample_batch_size=-1,
+25-01-12 11:53:25 | I |         element_size=-1,
+25-01-12 11:53:25 | I |         sample_size=-1,
+25-01-12 11:53:25 | I |         pre_reshape=True,
+25-01-12 11:53:25 | I |         outputs_device=cpu,
+25-01-12 11:53:25 | I |         allow_kernel_calib=False,
+25-01-12 11:53:25 | I |         ranges=[(<RangeMode.AbsMax: 1>, <RangeMode.AbsMax: 1>)],
+25-01-12 11:53:25 | I |         x_ranges=[<RangeMode.AbsMax: 1>],
+25-01-12 11:53:25 | I |         w_ranges=[<RangeMode.AbsMax: 1>],
+25-01-12 11:53:25 | I |         alpha=0.3,
+25-01-12 11:53:25 | I |         beta=0.7,
+25-01-12 11:53:25 | I |         num_grids=20),
+25-01-12 11:53:25 | I |       yx=QuantSmoothCalibConfig(
+25-01-12 11:53:25 | I |         degree=2,
+25-01-12 11:53:25 | I |         skips=[],
+25-01-12 11:53:25 | I |         objective=SearchBasedCalibObjective.OutputsError,
+25-01-12 11:53:25 | I |         strategy=SearchBasedCalibStrategy.Manual,
+25-01-12 11:53:25 | I |         granularity=SearchBasedCalibGranularity.Layer,
+25-01-12 11:53:25 | I |         element_batch_size=-1,
+25-01-12 11:53:25 | I |         sample_batch_size=-1,
+25-01-12 11:53:25 | I |         element_size=-1,
+25-01-12 11:53:25 | I |         sample_size=-1,
+25-01-12 11:53:25 | I |         pre_reshape=True,
+25-01-12 11:53:25 | I |         outputs_device=cpu,
+25-01-12 11:53:25 | I |         allow_kernel_calib=False,
+25-01-12 11:53:25 | I |         ranges=[(<RangeMode.AbsMax: 1>, <RangeMode.AbsMax: 1>)],
+25-01-12 11:53:25 | I |         x_ranges=[<RangeMode.AbsMax: 1>],
+25-01-12 11:53:25 | I |         w_ranges=[<RangeMode.AbsMax: 1>],
+25-01-12 11:53:25 | I |         alpha=0.5,
+25-01-12 11:53:25 | I |         beta=0.0,
+25-01-12 11:53:25 | I |         num_grids=20)),
+25-01-12 11:53:25 | I |     bias_correction=False,
+25-01-12 11:53:25 | I |     post_rotary=True,
+25-01-12 11:53:25 | I |     develop_dtype=torch.float32,
+25-01-12 11:53:25 | I |     select_wgts=None,
+25-01-12 11:53:25 | I |     select_ipts=None,
+25-01-12 11:53:25 | I |     select_opts=None,
+25-01-12 11:53:25 | I |     keywords_i={'proj_qkv': ['q_proj', 'k_proj', 'v_proj'], 'proj_out': ['out_proj', 'o_proj'], 'proj_1st': ['fc1', 'up_proj', 'gate_proj', 'w1', 'w3'], 'proj_2nd': ['fc2', 'down_proj', 'w2'], 'head': ['output', 'score', 'qa_outputs'], 'embed': ['embed', 'lm_head', 'embed_out'], 'router': ['block_sparse_moe']},
+25-01-12 11:53:25 | I |     keywords_w={'proj_qkv': ['q_proj', 'k_proj', 'v_proj'], 'proj_out': ['out_proj', 'o_proj'], 'proj_1st': ['fc1', 'up_proj', 'gate_proj', 'w1', 'w3'], 'proj_2nd': ['fc2', 'down_proj', 'w2'], 'head': ['output', 'score', 'qa_outputs'], 'embed': ['embed', 'lm_head', 'embed_out'], 'router': ['block_sparse_moe.gate']},
+25-01-12 11:53:25 | I |     keywords_o={'attn_q': ['q_rotary_emb'], 'attn_k': ['k_rotary_emb'], 'attn_v': ['v_proj']},
+25-01-12 11:53:25 | I |     module_types_i=(<class 'torch.nn.modules.linear.Linear'>, <class 'transformers.models.mixtral.modeling_mixtral.MixtralSparseMoeBlock'>),
+25-01-12 11:53:25 | I |     module_types_w=(<class 'torch.nn.modules.linear.Linear'>,),
+25-01-12 11:53:25 | I |     module_types_o=(<class 'torch.nn.modules.linear.Linear'>, <class 'lmquant.llm.nn.attention.RotaryEmbedding'>),
+25-01-12 11:53:25 | I |     num_hidden_layers=-1),
+25-01-12 11:53:25 | I |   seed=12345,
+25-01-12 11:53:25 | I |   save_model=True,
+25-01-12 11:53:25 | I |   output_dirpath=runs/llm/tiny/tiny-llama-1.1b/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/rot-reorder-smooth.xw.yx-w.static.kernel/skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0]-250112.115325,
+25-01-12 11:53:25 | I |   cache_dirpath=LlmQuantCachePath(rotation='runs/llm/cache/rotation/hadamard', reorder='runs/llm/cache/pileval.128x1024.[0-0]/reorder/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]', smooth='runs/llm/cache/pileval.128x1024.[0-0]/smooth/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/smooth.xw.OutputsError.Manual.Layer.d2.en1.sn1-yx.OutputsError.Manual.Layer.d2.en1.sn1/smooth.xw.[x.AbsMax.w.AbsMax]-yx.[x.AbsMax.w.AbsMax]/smooth.xw.a0p3.b0p7-yx.a0p5.b0/smooth.xw.skip.[proj_1st+proj_qkv]-yx.skip.[]', wgts='runs/llm/cache/pileval.128x1024.[0-0]/wgts/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/smooth.xw.OutputsError.Manual.Layer.d2.en1.sn1-yx.OutputsError.Manual.Layer.d2.en1.sn1/smooth.xw.[x.AbsMax.w.AbsMax]-yx.[x.AbsMax.w.AbsMax]/smooth.xw.a0p3.b0p7-yx.a0p5.b0/smooth.xw.skip.[proj_1st+proj_qkv]-yx.skip.[]/w.kernel.gptq.d0p01.b128/w.kernel.gptq.include.[proj_1st+proj_2nd+proj_out+proj_qkv]/w.range.OutputsError.Manual.Group.d2.e512.sn1/w.range.r.[1].static/w.range.skip.[]', acts=''),
+25-01-12 11:53:25 | I |   cache_path=LlmQuantCachePath(rotation='runs/llm/cache/rotation/hadamard/tiny-llama-1.1b.pt', reorder='runs/llm/cache/pileval.128x1024.[0-0]/reorder/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/tiny-llama-1.1b.pt', smooth='runs/llm/cache/pileval.128x1024.[0-0]/smooth/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/smooth.xw.OutputsError.Manual.Layer.d2.en1.sn1-yx.OutputsError.Manual.Layer.d2.en1.sn1/smooth.xw.[x.AbsMax.w.AbsMax]-yx.[x.AbsMax.w.AbsMax]/smooth.xw.a0p3.b0p7-yx.a0p5.b0/smooth.xw.skip.[proj_1st+proj_qkv]-yx.skip.[]/tiny-llama-1.1b.pt', wgts='runs/llm/cache/pileval.128x1024.[0-0]/wgts/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/smooth.xw.OutputsError.Manual.Layer.d2.en1.sn1-yx.OutputsError.Manual.Layer.d2.en1.sn1/smooth.xw.[x.AbsMax.w.AbsMax]-yx.[x.AbsMax.w.AbsMax]/smooth.xw.a0p3.b0p7-yx.a0p5.b0/smooth.xw.skip.[proj_1st+proj_qkv]-yx.skip.[]/w.kernel.gptq.d0p01.b128/w.kernel.gptq.include.[proj_1st+proj_2nd+proj_out+proj_qkv]/w.range.OutputsError.Manual.Group.d2.e512.sn1/w.range.r.[1].static/w.range.skip.[]/tiny-llama-1.1b.pt', acts=''),
+25-01-12 11:53:25 | I |   fairseq_args=/data/gyy/lmquant-main/projects/llm/configs/fairseq_args_less_data.json,
+25-01-12 11:53:25 | I |   gen_teacher_opts=False,
+25-01-12 11:53:25 | I |   enable_cache=True,
+25-01-12 11:53:25 | I |   with_prepocess=True)
+25-01-12 11:53:25 | I | === Dumped Configurations ===
+25-01-12 11:53:25 | I | { 'calib': { 'cache_root': 'runs',
+25-01-12 11:53:25 | I |              'data': 'pileval',
+25-01-12 11:53:25 | I |              'dataset_path': 'mit-han-lab/pile-val-backup',
+25-01-12 11:53:25 | I |              'local_dataset_path': '/dataset/pile',
+25-01-12 11:53:25 | I |              'max_seq_length': 0,
+25-01-12 11:53:25 | I |              'min_seq_length': 0,
+25-01-12 11:53:25 | I |              'num_samples': 128,
+25-01-12 11:53:25 | I |              'seq_length': 1024},
+25-01-12 11:53:25 | I |   'enable_cache': True,
+25-01-12 11:53:25 | I |   'eval': { 'attach_timestamp': True,
+25-01-12 11:53:25 | I |             'batch_size': 8,
+25-01-12 11:53:25 | I |             'evaluator': 'gptq',
+25-01-12 11:53:25 | I |             'max_seq_length': -4096,
+25-01-12 11:53:25 | I |             'num_gpus': 4,
+25-01-12 11:53:25 | I |             'output_dirname': 'skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0]-250112.115325',
+25-01-12 11:53:25 | I |             'output_root': 'runs',
+25-01-12 11:53:25 | I |             'tasks': ['wikitext']},
+25-01-12 11:53:25 | I |   'fairseq_args': '/data/gyy/lmquant-main/projects/llm/configs/fairseq_args_less_data.json',
+25-01-12 11:53:25 | I |   'gen_teacher_opts': False,
+25-01-12 11:53:25 | I |   'model': { 'local_path': '/dataset/models/tiny/tiny-llama-1.1b',
+25-01-12 11:53:25 | I |              'local_root': '/dataset/models',
+25-01-12 11:53:25 | I |              'name': 'tiny-llama-1.1b',
+25-01-12 11:53:25 | I |              'path': '/data/gyy/TinyLlama',
+25-01-12 11:53:25 | I |              'root': '/dataset/models'},
+25-01-12 11:53:25 | I |   'quant': { 'bias_correction': False,
+25-01-12 11:53:25 | I |              'develop_dtype': 'torch.float32',
+25-01-12 11:53:25 | I |              'enable_reorder': True,
+25-01-12 11:53:25 | I |              'enable_rotation': True,
+25-01-12 11:53:25 | I |              'enable_select_ipts': False,
+25-01-12 11:53:25 | I |              'enable_select_opts': False,
+25-01-12 11:53:25 | I |              'enable_select_wgts': False,
+25-01-12 11:53:25 | I |              'enable_smooth': True,
+25-01-12 11:53:25 | I |              'ipts': { 'compute_dtype': None,
+25-01-12 11:53:25 | I |                        'compute_group_level': -1,
+25-01-12 11:53:25 | I |                        'dtype': 'sint8',
+25-01-12 11:53:25 | I |                        'enable_calib_range': False,
+25-01-12 11:53:25 | I |                        'group_scale_dtypes': ['torch.float16'],
+25-01-12 11:53:25 | I |                        'group_shapes': [[1, -1, -1]],
+25-01-12 11:53:25 | I |                        'saturate_compute_dtype': False,
+25-01-12 11:53:25 | I |                        'skips': ['embed', 'head', 'router'],
+25-01-12 11:53:25 | I |                        'static': False},
+25-01-12 11:53:25 | I |              'opts': { 'compute_dtype': None,
+25-01-12 11:53:25 | I |                        'compute_group_level': -1,
+25-01-12 11:53:25 | I |                        'dtype': 'zint4',
+25-01-12 11:53:25 | I |                        'enable_calib_range': False,
+25-01-12 11:53:25 | I |                        'group_scale_dtypes': ['torch.float16'],
+25-01-12 11:53:25 | I |                        'group_shapes': [[1, 128, -1]],
+25-01-12 11:53:25 | I |                        'saturate_compute_dtype': False,
+25-01-12 11:53:25 | I |                        'skips': ['attn_q'],
+25-01-12 11:53:25 | I |                        'static': False},
+25-01-12 11:53:25 | I |              'post_rotary': True,
+25-01-12 11:53:25 | I |              'reorder': { 'allow_kernel_calib': False,
+25-01-12 11:53:25 | I |                           'channel_index': 'Sequential',
+25-01-12 11:53:25 | I |                           'channel_metric': 'InputsAbsMax',
+25-01-12 11:53:25 | I |                           'degree': 2,
+25-01-12 11:53:25 | I |                           'dynamic': False,
+25-01-12 11:53:25 | I |                           'element_batch_size': -1,
+25-01-12 11:53:25 | I |                           'element_size': -1,
+25-01-12 11:53:25 | I |                           'outputs_device': 'cpu',
+25-01-12 11:53:25 | I |                           'pre_reshape': True,
+25-01-12 11:53:25 | I |                           'sample_batch_size': -1,
+25-01-12 11:53:25 | I |                           'sample_size': -1,
+25-01-12 11:53:25 | I |                           'skips': ['proj_out', 'proj_qkv', 'residual'],
+25-01-12 11:53:25 | I |                           'strategy': 'Manual'},
+25-01-12 11:53:25 | I |              'rotation': {'random': False, 'transforms': []},
+25-01-12 11:53:25 | I |              'smooth': { 'enable_xw': True,
+25-01-12 11:53:25 | I |                          'enable_yx': True,
+25-01-12 11:53:25 | I |                          'xw': { 'allow_kernel_calib': False,
+25-01-12 11:53:25 | I |                                  'alpha': 0.3,
+25-01-12 11:53:25 | I |                                  'beta': 0.7,
+25-01-12 11:53:25 | I |                                  'degree': 2,
+25-01-12 11:53:25 | I |                                  'element_batch_size': -1,
+25-01-12 11:53:25 | I |                                  'element_size': -1,
+25-01-12 11:53:25 | I |                                  'granularity': 'Layer',
+25-01-12 11:53:25 | I |                                  'num_grids': 20,
+25-01-12 11:53:25 | I |                                  'objective': 'OutputsError',
+25-01-12 11:53:25 | I |                                  'outputs_device': 'cpu',
+25-01-12 11:53:25 | I |                                  'pre_reshape': True,
+25-01-12 11:53:25 | I |                                  'ranges': [['AbsMax', 'AbsMax']],
+25-01-12 11:53:25 | I |                                  'sample_batch_size': -1,
+25-01-12 11:53:25 | I |                                  'sample_size': -1,
+25-01-12 11:53:25 | I |                                  'skips': ['proj_1st', 'proj_qkv'],
+25-01-12 11:53:25 | I |                                  'strategy': 'Manual'},
+25-01-12 11:53:25 | I |                          'yx': { 'allow_kernel_calib': False,
+25-01-12 11:53:25 | I |                                  'alpha': 0.5,
+25-01-12 11:53:25 | I |                                  'beta': 0.0,
+25-01-12 11:53:25 | I |                                  'degree': 2,
+25-01-12 11:53:25 | I |                                  'element_batch_size': -1,
+25-01-12 11:53:25 | I |                                  'element_size': -1,
+25-01-12 11:53:25 | I |                                  'granularity': 'Layer',
+25-01-12 11:53:25 | I |                                  'num_grids': 20,
+25-01-12 11:53:25 | I |                                  'objective': 'OutputsError',
+25-01-12 11:53:25 | I |                                  'outputs_device': 'cpu',
+25-01-12 11:53:25 | I |                                  'pre_reshape': True,
+25-01-12 11:53:25 | I |                                  'ranges': [['AbsMax', 'AbsMax']],
+25-01-12 11:53:25 | I |                                  'sample_batch_size': -1,
+25-01-12 11:53:25 | I |                                  'sample_size': -1,
+25-01-12 11:53:25 | I |                                  'skips': [],
+25-01-12 11:53:25 | I |                                  'strategy': 'Manual'}},
+25-01-12 11:53:25 | I |              'wgts': { 'calib_kernel': { 'enable_gptq': True,
+25-01-12 11:53:25 | I |                                          'gptq': { 'block_size': 128,
+25-01-12 11:53:25 | I |                                                    'damp_percentage': 0.01,
+25-01-12 11:53:25 | I |                                                    'hessian_block_size': 512,
+25-01-12 11:53:25 | I |                                                    'includes': ['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'],
+25-01-12 11:53:25 | I |                                                    'num_inv_tries': 250}},
+25-01-12 11:53:25 | I |                        'calib_range': { 'allow_kernel_calib': False,
+25-01-12 11:53:25 | I |                                         'degree': 2,
+25-01-12 11:53:25 | I |                                         'element_batch_size': 64,
+25-01-12 11:53:25 | I |                                         'element_size': 512,
+25-01-12 11:53:25 | I |                                         'granularity': 'Group',
+25-01-12 11:53:25 | I |                                         'max_expand': 1.0,
+25-01-12 11:53:25 | I |                                         'max_shrink': 0.2,
+25-01-12 11:53:25 | I |                                         'num_grids': 80,
+25-01-12 11:53:25 | I |                                         'objective': 'OutputsError',
+25-01-12 11:53:25 | I |                                         'outputs_device': 'cpu',
+25-01-12 11:53:25 | I |                                         'pre_reshape': True,
+25-01-12 11:53:25 | I |                                         'ratio': 1.0,
+25-01-12 11:53:25 | I |                                         'sample_batch_size': -1,
+25-01-12 11:53:25 | I |                                         'sample_size': -1,
+25-01-12 11:53:25 | I |                                         'skips': [],
+25-01-12 11:53:25 | I |                                         'strategy': 'Manual'},
+25-01-12 11:53:25 | I |                        'compute_dtype': 'sint8',
+25-01-12 11:53:25 | I |                        'compute_group_level': 0,
+25-01-12 11:53:25 | I |                        'dtype': 'zint4',
+25-01-12 11:53:25 | I |                        'enable_calib_kernel': True,
+25-01-12 11:53:25 | I |                        'enable_calib_range': True,
+25-01-12 11:53:25 | I |                        'group_scale_dtypes': ['torch.float16', 'sint8'],
+25-01-12 11:53:25 | I |                        'group_shapes': [[1, -1, -1], [1, 128, -1]],
+25-01-12 11:53:25 | I |                        'saturate_compute_dtype': False,
+25-01-12 11:53:25 | I |                        'skips': ['embed', 'head', 'router']}},
+25-01-12 11:53:25 | I |   'save_model': True,
+25-01-12 11:53:25 | I |   'seed': 12345,
+25-01-12 11:53:25 | I |   'with_prepocess': True}
+25-01-12 11:53:25 | I | === Output Directory ===
+25-01-12 11:53:25 | I | runs/llm/tiny/tiny-llama-1.1b/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/rot-reorder-smooth.xw.yx-w.static.kernel/skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0]-250112.115325
+25-01-12 11:53:25 | I | === Start Evaluating ===
+25-01-12 11:53:25 | I | * Building model tiny-llama-1.1b from /data/gyy/TinyLlama
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.0.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.1.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.2.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.3.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.4.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.5.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.6.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.7.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.8.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.9.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.10.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.11.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.12.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.13.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.14.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.15.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.16.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.17.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.18.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.19.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.20.self_attn
+25-01-12 11:53:28 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.21.self_attn
+25-01-12 11:53:28 | I | * Development dtype is torch.float32
+25-01-12 11:53:28 | I | * Rotating model
+25-01-12 11:53:28 | I |   - Loading rotation from runs/llm/cache/rotation/hadamard/tiny-llama-1.1b.pt
+25-01-12 11:53:28 | D |   - Transforming norm and linear in model.layers.0
+25-01-12 11:53:29 | D |   - Transforming norm and linear in model.layers.1
+25-01-12 11:53:29 | D |   - Transforming norm and linear in model.layers.2
+25-01-12 11:53:29 | D |   - Transforming norm and linear in model.layers.3
+25-01-12 11:53:29 | D |   - Transforming norm and linear in model.layers.4
+25-01-12 11:53:29 | D |   - Transforming norm and linear in model.layers.5
+25-01-12 11:53:30 | D |   - Transforming norm and linear in model.layers.6
+25-01-12 11:53:30 | D |   - Transforming norm and linear in model.layers.7
+25-01-12 11:53:30 | D |   - Transforming norm and linear in model.layers.8
+25-01-12 11:53:30 | D |   - Transforming norm and linear in model.layers.9
+25-01-12 11:53:31 | D |   - Transforming norm and linear in model.layers.10
+25-01-12 11:53:31 | D |   - Transforming norm and linear in model.layers.11
+25-01-12 11:53:31 | D |   - Transforming norm and linear in model.layers.12
+25-01-12 11:53:31 | D |   - Transforming norm and linear in model.layers.13
+25-01-12 11:53:32 | D |   - Transforming norm and linear in model.layers.14
+25-01-12 11:53:32 | D |   - Transforming norm and linear in model.layers.15
+25-01-12 11:53:32 | D |   - Transforming norm and linear in model.layers.16
+25-01-12 11:53:32 | D |   - Transforming norm and linear in model.layers.17
+25-01-12 11:53:32 | D |   - Transforming norm and linear in model.layers.18
+25-01-12 11:53:33 | D |   - Transforming norm and linear in model.layers.19
+25-01-12 11:53:33 | D |   - Transforming norm and linear in model.layers.20
+25-01-12 11:53:33 | D |   - Transforming norm and linear in model.layers.21
+25-01-12 11:53:33 | D |   - Transforming model.norm
+25-01-12 11:53:33 | D |   - Rotating model.embed_tokens
+25-01-12 11:53:33 | D |   - Rotating model.layers.0
+25-01-12 11:53:33 | D |     - Rotating model.layers.0.self_attn.q_proj (in)
+25-01-12 11:53:34 | D |     - Rotating model.layers.0.self_attn.k_proj (in)
+25-01-12 11:53:34 | D |     - Rotating model.layers.0.self_attn.v_proj (in)
+25-01-12 11:53:34 | D |     - Rotating model.layers.0.self_attn.o_proj (out)
+25-01-12 11:53:34 | D |     - Rotating model.layers.0.proj_1st (in)
+25-01-12 11:53:34 | D |     - Rotating model.layers.0.proj_2nd (out)
+25-01-12 11:53:34 | D |   - Rotating model.layers.1
+25-01-12 11:53:34 | D |     - Rotating model.layers.1.self_attn.q_proj (in)
+25-01-12 11:53:34 | D |     - Rotating model.layers.1.self_attn.k_proj (in)
+25-01-12 11:53:34 | D |     - Rotating model.layers.1.self_attn.v_proj (in)
+25-01-12 11:53:34 | D |     - Rotating model.layers.1.self_attn.o_proj (out)
+25-01-12 11:53:34 | D |     - Rotating model.layers.1.proj_1st (in)
+25-01-12 11:53:34 | D |     - Rotating model.layers.1.proj_2nd (out)
+25-01-12 11:53:35 | D |   - Rotating model.layers.2
+25-01-12 11:53:35 | D |     - Rotating model.layers.2.self_attn.q_proj (in)
+25-01-12 11:53:35 | D |     - Rotating model.layers.2.self_attn.k_proj (in)
+25-01-12 11:53:35 | D |     - Rotating model.layers.2.self_attn.v_proj (in)
+25-01-12 11:53:35 | D |     - Rotating model.layers.2.self_attn.o_proj (out)
+25-01-12 11:53:35 | D |     - Rotating model.layers.2.proj_1st (in)
+25-01-12 11:53:35 | D |     - Rotating model.layers.2.proj_2nd (out)
+25-01-12 11:53:35 | D |   - Rotating model.layers.3
+25-01-12 11:53:35 | D |     - Rotating model.layers.3.self_attn.q_proj (in)
+25-01-12 11:53:35 | D |     - Rotating model.layers.3.self_attn.k_proj (in)
+25-01-12 11:53:35 | D |     - Rotating model.layers.3.self_attn.v_proj (in)
+25-01-12 11:53:35 | D |     - Rotating model.layers.3.self_attn.o_proj (out)
+25-01-12 11:53:35 | D |     - Rotating model.layers.3.proj_1st (in)
+25-01-12 11:53:35 | D |     - Rotating model.layers.3.proj_2nd (out)
+25-01-12 11:53:35 | D |   - Rotating model.layers.4
+25-01-12 11:53:35 | D |     - Rotating model.layers.4.self_attn.q_proj (in)
+25-01-12 11:53:35 | D |     - Rotating model.layers.4.self_attn.k_proj (in)
+25-01-12 11:53:35 | D |     - Rotating model.layers.4.self_attn.v_proj (in)
+25-01-12 11:53:35 | D |     - Rotating model.layers.4.self_attn.o_proj (out)
+25-01-12 11:53:35 | D |     - Rotating model.layers.4.proj_1st (in)
+25-01-12 11:53:35 | D |     - Rotating model.layers.4.proj_2nd (out)
+25-01-12 11:53:36 | D |   - Rotating model.layers.5
+25-01-12 11:53:36 | D |     - Rotating model.layers.5.self_attn.q_proj (in)
+25-01-12 11:53:36 | D |     - Rotating model.layers.5.self_attn.k_proj (in)
+25-01-12 11:53:36 | D |     - Rotating model.layers.5.self_attn.v_proj (in)
+25-01-12 11:53:36 | D |     - Rotating model.layers.5.self_attn.o_proj (out)
+25-01-12 11:53:36 | D |     - Rotating model.layers.5.proj_1st (in)
+25-01-12 11:53:36 | D |     - Rotating model.layers.5.proj_2nd (out)
+25-01-12 11:53:36 | D |   - Rotating model.layers.6
+25-01-12 11:53:36 | D |     - Rotating model.layers.6.self_attn.q_proj (in)
+25-01-12 11:53:36 | D |     - Rotating model.layers.6.self_attn.k_proj (in)
+25-01-12 11:53:36 | D |     - Rotating model.layers.6.self_attn.v_proj (in)
+25-01-12 11:53:36 | D |     - Rotating model.layers.6.self_attn.o_proj (out)
+25-01-12 11:53:36 | D |     - Rotating model.layers.6.proj_1st (in)
+25-01-12 11:53:36 | D |     - Rotating model.layers.6.proj_2nd (out)
+25-01-12 11:53:36 | D |   - Rotating model.layers.7
+25-01-12 11:53:36 | D |     - Rotating model.layers.7.self_attn.q_proj (in)
+25-01-12 11:53:36 | D |     - Rotating model.layers.7.self_attn.k_proj (in)
+25-01-12 11:53:36 | D |     - Rotating model.layers.7.self_attn.v_proj (in)
+25-01-12 11:53:36 | D |     - Rotating model.layers.7.self_attn.o_proj (out)
+25-01-12 11:53:36 | D |     - Rotating model.layers.7.proj_1st (in)
+25-01-12 11:53:36 | D |     - Rotating model.layers.7.proj_2nd (out)
+25-01-12 11:53:37 | D |   - Rotating model.layers.8
+25-01-12 11:53:37 | D |     - Rotating model.layers.8.self_attn.q_proj (in)
+25-01-12 11:53:37 | D |     - Rotating model.layers.8.self_attn.k_proj (in)
+25-01-12 11:53:37 | D |     - Rotating model.layers.8.self_attn.v_proj (in)
+25-01-12 11:53:37 | D |     - Rotating model.layers.8.self_attn.o_proj (out)
+25-01-12 11:53:37 | D |     - Rotating model.layers.8.proj_1st (in)
+25-01-12 11:53:37 | D |     - Rotating model.layers.8.proj_2nd (out)
+25-01-12 11:53:37 | D |   - Rotating model.layers.9
+25-01-12 11:53:37 | D |     - Rotating model.layers.9.self_attn.q_proj (in)
+25-01-12 11:53:37 | D |     - Rotating model.layers.9.self_attn.k_proj (in)
+25-01-12 11:53:37 | D |     - Rotating model.layers.9.self_attn.v_proj (in)
+25-01-12 11:53:37 | D |     - Rotating model.layers.9.self_attn.o_proj (out)
+25-01-12 11:53:37 | D |     - Rotating model.layers.9.proj_1st (in)
+25-01-12 11:53:37 | D |     - Rotating model.layers.9.proj_2nd (out)
+25-01-12 11:53:37 | D |   - Rotating model.layers.10
+25-01-12 11:53:37 | D |     - Rotating model.layers.10.self_attn.q_proj (in)
+25-01-12 11:53:37 | D |     - Rotating model.layers.10.self_attn.k_proj (in)
+25-01-12 11:53:37 | D |     - Rotating model.layers.10.self_attn.v_proj (in)
+25-01-12 11:53:37 | D |     - Rotating model.layers.10.self_attn.o_proj (out)
+25-01-12 11:53:37 | D |     - Rotating model.layers.10.proj_1st (in)
+25-01-12 11:53:37 | D |     - Rotating model.layers.10.proj_2nd (out)
+25-01-12 11:53:38 | D |   - Rotating model.layers.11
+25-01-12 11:53:38 | D |     - Rotating model.layers.11.self_attn.q_proj (in)
+25-01-12 11:53:38 | D |     - Rotating model.layers.11.self_attn.k_proj (in)
+25-01-12 11:53:38 | D |     - Rotating model.layers.11.self_attn.v_proj (in)
+25-01-12 11:53:38 | D |     - Rotating model.layers.11.self_attn.o_proj (out)
+25-01-12 11:53:38 | D |     - Rotating model.layers.11.proj_1st (in)
+25-01-12 11:53:38 | D |     - Rotating model.layers.11.proj_2nd (out)
+25-01-12 11:53:38 | D |   - Rotating model.layers.12
+25-01-12 11:53:38 | D |     - Rotating model.layers.12.self_attn.q_proj (in)
+25-01-12 11:53:38 | D |     - Rotating model.layers.12.self_attn.k_proj (in)
+25-01-12 11:53:38 | D |     - Rotating model.layers.12.self_attn.v_proj (in)
+25-01-12 11:53:38 | D |     - Rotating model.layers.12.self_attn.o_proj (out)
+25-01-12 11:53:38 | D |     - Rotating model.layers.12.proj_1st (in)
+25-01-12 11:53:38 | D |     - Rotating model.layers.12.proj_2nd (out)
+25-01-12 11:53:39 | D |   - Rotating model.layers.13
+25-01-12 11:53:39 | D |     - Rotating model.layers.13.self_attn.q_proj (in)
+25-01-12 11:53:39 | D |     - Rotating model.layers.13.self_attn.k_proj (in)
+25-01-12 11:53:39 | D |     - Rotating model.layers.13.self_attn.v_proj (in)
+25-01-12 11:53:39 | D |     - Rotating model.layers.13.self_attn.o_proj (out)
+25-01-12 11:53:39 | D |     - Rotating model.layers.13.proj_1st (in)
+25-01-12 11:53:39 | D |     - Rotating model.layers.13.proj_2nd (out)
+25-01-12 11:53:39 | D |   - Rotating model.layers.14
+25-01-12 11:53:39 | D |     - Rotating model.layers.14.self_attn.q_proj (in)
+25-01-12 11:53:39 | D |     - Rotating model.layers.14.self_attn.k_proj (in)
+25-01-12 11:53:39 | D |     - Rotating model.layers.14.self_attn.v_proj (in)
+25-01-12 11:53:39 | D |     - Rotating model.layers.14.self_attn.o_proj (out)
+25-01-12 11:53:39 | D |     - Rotating model.layers.14.proj_1st (in)
+25-01-12 11:53:39 | D |     - Rotating model.layers.14.proj_2nd (out)
+25-01-12 11:53:39 | D |   - Rotating model.layers.15
+25-01-12 11:53:39 | D |     - Rotating model.layers.15.self_attn.q_proj (in)
+25-01-12 11:53:39 | D |     - Rotating model.layers.15.self_attn.k_proj (in)
+25-01-12 11:53:39 | D |     - Rotating model.layers.15.self_attn.v_proj (in)
+25-01-12 11:53:39 | D |     - Rotating model.layers.15.self_attn.o_proj (out)
+25-01-12 11:53:39 | D |     - Rotating model.layers.15.proj_1st (in)
+25-01-12 11:53:39 | D |     - Rotating model.layers.15.proj_2nd (out)
+25-01-12 11:53:40 | D |   - Rotating model.layers.16
+25-01-12 11:53:40 | D |     - Rotating model.layers.16.self_attn.q_proj (in)
+25-01-12 11:53:40 | D |     - Rotating model.layers.16.self_attn.k_proj (in)
+25-01-12 11:53:40 | D |     - Rotating model.layers.16.self_attn.v_proj (in)
+25-01-12 11:53:40 | D |     - Rotating model.layers.16.self_attn.o_proj (out)
+25-01-12 11:53:40 | D |     - Rotating model.layers.16.proj_1st (in)
+25-01-12 11:53:40 | D |     - Rotating model.layers.16.proj_2nd (out)
+25-01-12 11:53:40 | D |   - Rotating model.layers.17
+25-01-12 11:53:40 | D |     - Rotating model.layers.17.self_attn.q_proj (in)
+25-01-12 11:53:40 | D |     - Rotating model.layers.17.self_attn.k_proj (in)
+25-01-12 11:53:40 | D |     - Rotating model.layers.17.self_attn.v_proj (in)
+25-01-12 11:53:40 | D |     - Rotating model.layers.17.self_attn.o_proj (out)
+25-01-12 11:53:40 | D |     - Rotating model.layers.17.proj_1st (in)
+25-01-12 11:53:40 | D |     - Rotating model.layers.17.proj_2nd (out)
+25-01-12 11:53:40 | D |   - Rotating model.layers.18
+25-01-12 11:53:40 | D |     - Rotating model.layers.18.self_attn.q_proj (in)
+25-01-12 11:53:40 | D |     - Rotating model.layers.18.self_attn.k_proj (in)
+25-01-12 11:53:40 | D |     - Rotating model.layers.18.self_attn.v_proj (in)
+25-01-12 11:53:40 | D |     - Rotating model.layers.18.self_attn.o_proj (out)
+25-01-12 11:53:40 | D |     - Rotating model.layers.18.proj_1st (in)
+25-01-12 11:53:40 | D |     - Rotating model.layers.18.proj_2nd (out)
+25-01-12 11:53:41 | D |   - Rotating model.layers.19
+25-01-12 11:53:41 | D |     - Rotating model.layers.19.self_attn.q_proj (in)
+25-01-12 11:53:41 | D |     - Rotating model.layers.19.self_attn.k_proj (in)
+25-01-12 11:53:41 | D |     - Rotating model.layers.19.self_attn.v_proj (in)
+25-01-12 11:53:41 | D |     - Rotating model.layers.19.self_attn.o_proj (out)
+25-01-12 11:53:41 | D |     - Rotating model.layers.19.proj_1st (in)
+25-01-12 11:53:41 | D |     - Rotating model.layers.19.proj_2nd (out)
+25-01-12 11:53:41 | D |   - Rotating model.layers.20
+25-01-12 11:53:41 | D |     - Rotating model.layers.20.self_attn.q_proj (in)
+25-01-12 11:53:41 | D |     - Rotating model.layers.20.self_attn.k_proj (in)
+25-01-12 11:53:41 | D |     - Rotating model.layers.20.self_attn.v_proj (in)
+25-01-12 11:53:41 | D |     - Rotating model.layers.20.self_attn.o_proj (out)
+25-01-12 11:53:41 | D |     - Rotating model.layers.20.proj_1st (in)
+25-01-12 11:53:41 | D |     - Rotating model.layers.20.proj_2nd (out)
+25-01-12 11:53:41 | D |   - Rotating model.layers.21
+25-01-12 11:53:41 | D |     - Rotating model.layers.21.self_attn.q_proj (in)
+25-01-12 11:53:41 | D |     - Rotating model.layers.21.self_attn.k_proj (in)
+25-01-12 11:53:41 | D |     - Rotating model.layers.21.self_attn.v_proj (in)
+25-01-12 11:53:41 | D |     - Rotating model.layers.21.self_attn.o_proj (out)
+25-01-12 11:53:41 | D |     - Rotating model.layers.21.proj_1st (in)
+25-01-12 11:53:41 | D |     - Rotating model.layers.21.proj_2nd (out)
+25-01-12 11:53:42 | D |   - Rotating lm_head (in)
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.0.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.1.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.2.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.3.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.4.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.5.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.6.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.7.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.8.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.9.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.10.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.11.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.12.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.13.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.14.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.15.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.16.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.17.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.18.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.19.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.20.self_attn
+25-01-12 11:53:47 | I | - Patching LlamaSdpaAttention._old_forward in model.layers.21.self_attn
+25-01-12 11:53:47 | I | * Rotating model in float16 again
+25-01-12 11:53:47 | D |   - Transforming norm and linear in model.layers.0
+25-01-12 11:53:48 | D |   - Transforming norm and linear in model.layers.1
+25-01-12 11:53:48 | D |   - Transforming norm and linear in model.layers.2
+25-01-12 11:53:48 | D |   - Transforming norm and linear in model.layers.3
+25-01-12 11:53:48 | D |   - Transforming norm and linear in model.layers.4
+25-01-12 11:53:49 | D |   - Transforming norm and linear in model.layers.5
+25-01-12 11:53:49 | D |   - Transforming norm and linear in model.layers.6
+25-01-12 11:53:49 | D |   - Transforming norm and linear in model.layers.7
+25-01-12 11:53:49 | D |   - Transforming norm and linear in model.layers.8
+25-01-12 11:53:49 | D |   - Transforming norm and linear in model.layers.9
+25-01-12 11:53:50 | D |   - Transforming norm and linear in model.layers.10
+25-01-12 11:53:50 | D |   - Transforming norm and linear in model.layers.11
+25-01-12 11:53:50 | D |   - Transforming norm and linear in model.layers.12
+25-01-12 11:53:50 | D |   - Transforming norm and linear in model.layers.13
+25-01-12 11:53:51 | D |   - Transforming norm and linear in model.layers.14
+25-01-12 11:53:51 | D |   - Transforming norm and linear in model.layers.15
+25-01-12 11:53:51 | D |   - Transforming norm and linear in model.layers.16
+25-01-12 11:53:51 | D |   - Transforming norm and linear in model.layers.17
+25-01-12 11:53:51 | D |   - Transforming norm and linear in model.layers.18
+25-01-12 11:53:52 | D |   - Transforming norm and linear in model.layers.19
+25-01-12 11:53:52 | D |   - Transforming norm and linear in model.layers.20
+25-01-12 11:53:52 | D |   - Transforming norm and linear in model.layers.21
+25-01-12 11:53:52 | D |   - Transforming model.norm
+25-01-12 11:53:52 | D |   - Rotating model.embed_tokens
+25-01-12 11:53:52 | D |   - Rotating model.layers.0
+25-01-12 11:53:52 | D |     - Rotating model.layers.0.self_attn.q_proj (in)
+25-01-12 11:53:52 | D |     - Rotating model.layers.0.self_attn.k_proj (in)
+25-01-12 11:53:52 | D |     - Rotating model.layers.0.self_attn.v_proj (in)
+25-01-12 11:53:52 | D |     - Rotating model.layers.0.self_attn.o_proj (out)
+25-01-12 11:53:52 | D |     - Rotating model.layers.0.proj_1st (in)
+25-01-12 11:53:52 | D |     - Rotating model.layers.0.proj_2nd (out)
+25-01-12 11:53:53 | D |   - Rotating model.layers.1
+25-01-12 11:53:53 | D |     - Rotating model.layers.1.self_attn.q_proj (in)
+25-01-12 11:53:53 | D |     - Rotating model.layers.1.self_attn.k_proj (in)
+25-01-12 11:53:53 | D |     - Rotating model.layers.1.self_attn.v_proj (in)
+25-01-12 11:53:53 | D |     - Rotating model.layers.1.self_attn.o_proj (out)
+25-01-12 11:53:53 | D |     - Rotating model.layers.1.proj_1st (in)
+25-01-12 11:53:53 | D |     - Rotating model.layers.1.proj_2nd (out)
+25-01-12 11:53:54 | D |   - Rotating model.layers.2
+25-01-12 11:53:54 | D |     - Rotating model.layers.2.self_attn.q_proj (in)
+25-01-12 11:53:54 | D |     - Rotating model.layers.2.self_attn.k_proj (in)
+25-01-12 11:53:54 | D |     - Rotating model.layers.2.self_attn.v_proj (in)
+25-01-12 11:53:54 | D |     - Rotating model.layers.2.self_attn.o_proj (out)
+25-01-12 11:53:54 | D |     - Rotating model.layers.2.proj_1st (in)
+25-01-12 11:53:54 | D |     - Rotating model.layers.2.proj_2nd (out)
+25-01-12 11:53:54 | D |   - Rotating model.layers.3
+25-01-12 11:53:54 | D |     - Rotating model.layers.3.self_attn.q_proj (in)
+25-01-12 11:53:54 | D |     - Rotating model.layers.3.self_attn.k_proj (in)
+25-01-12 11:53:54 | D |     - Rotating model.layers.3.self_attn.v_proj (in)
+25-01-12 11:53:54 | D |     - Rotating model.layers.3.self_attn.o_proj (out)
+25-01-12 11:53:54 | D |     - Rotating model.layers.3.proj_1st (in)
+25-01-12 11:53:54 | D |     - Rotating model.layers.3.proj_2nd (out)
+25-01-12 11:53:54 | D |   - Rotating model.layers.4
+25-01-12 11:53:54 | D |     - Rotating model.layers.4.self_attn.q_proj (in)
+25-01-12 11:53:54 | D |     - Rotating model.layers.4.self_attn.k_proj (in)
+25-01-12 11:53:54 | D |     - Rotating model.layers.4.self_attn.v_proj (in)
+25-01-12 11:53:54 | D |     - Rotating model.layers.4.self_attn.o_proj (out)
+25-01-12 11:53:54 | D |     - Rotating model.layers.4.proj_1st (in)
+25-01-12 11:53:54 | D |     - Rotating model.layers.4.proj_2nd (out)
+25-01-12 11:53:55 | D |   - Rotating model.layers.5
+25-01-12 11:53:55 | D |     - Rotating model.layers.5.self_attn.q_proj (in)
+25-01-12 11:53:55 | D |     - Rotating model.layers.5.self_attn.k_proj (in)
+25-01-12 11:53:55 | D |     - Rotating model.layers.5.self_attn.v_proj (in)
+25-01-12 11:53:55 | D |     - Rotating model.layers.5.self_attn.o_proj (out)
+25-01-12 11:53:55 | D |     - Rotating model.layers.5.proj_1st (in)
+25-01-12 11:53:55 | D |     - Rotating model.layers.5.proj_2nd (out)
+25-01-12 11:53:55 | D |   - Rotating model.layers.6
+25-01-12 11:53:55 | D |     - Rotating model.layers.6.self_attn.q_proj (in)
+25-01-12 11:53:55 | D |     - Rotating model.layers.6.self_attn.k_proj (in)
+25-01-12 11:53:55 | D |     - Rotating model.layers.6.self_attn.v_proj (in)
+25-01-12 11:53:55 | D |     - Rotating model.layers.6.self_attn.o_proj (out)
+25-01-12 11:53:55 | D |     - Rotating model.layers.6.proj_1st (in)
+25-01-12 11:53:55 | D |     - Rotating model.layers.6.proj_2nd (out)
+25-01-12 11:53:55 | D |   - Rotating model.layers.7
+25-01-12 11:53:55 | D |     - Rotating model.layers.7.self_attn.q_proj (in)
+25-01-12 11:53:55 | D |     - Rotating model.layers.7.self_attn.k_proj (in)
+25-01-12 11:53:55 | D |     - Rotating model.layers.7.self_attn.v_proj (in)
+25-01-12 11:53:55 | D |     - Rotating model.layers.7.self_attn.o_proj (out)
+25-01-12 11:53:55 | D |     - Rotating model.layers.7.proj_1st (in)
+25-01-12 11:53:55 | D |     - Rotating model.layers.7.proj_2nd (out)
+25-01-12 11:53:56 | D |   - Rotating model.layers.8
+25-01-12 11:53:56 | D |     - Rotating model.layers.8.self_attn.q_proj (in)
+25-01-12 11:53:56 | D |     - Rotating model.layers.8.self_attn.k_proj (in)
+25-01-12 11:53:56 | D |     - Rotating model.layers.8.self_attn.v_proj (in)
+25-01-12 11:53:56 | D |     - Rotating model.layers.8.self_attn.o_proj (out)
+25-01-12 11:53:56 | D |     - Rotating model.layers.8.proj_1st (in)
+25-01-12 11:53:56 | D |     - Rotating model.layers.8.proj_2nd (out)
+25-01-12 11:53:56 | D |   - Rotating model.layers.9
+25-01-12 11:53:56 | D |     - Rotating model.layers.9.self_attn.q_proj (in)
+25-01-12 11:53:56 | D |     - Rotating model.layers.9.self_attn.k_proj (in)
+25-01-12 11:53:56 | D |     - Rotating model.layers.9.self_attn.v_proj (in)
+25-01-12 11:53:56 | D |     - Rotating model.layers.9.self_attn.o_proj (out)
+25-01-12 11:53:56 | D |     - Rotating model.layers.9.proj_1st (in)
+25-01-12 11:53:56 | D |     - Rotating model.layers.9.proj_2nd (out)
+25-01-12 11:53:56 | D |   - Rotating model.layers.10
+25-01-12 11:53:56 | D |     - Rotating model.layers.10.self_attn.q_proj (in)
+25-01-12 11:53:56 | D |     - Rotating model.layers.10.self_attn.k_proj (in)
+25-01-12 11:53:56 | D |     - Rotating model.layers.10.self_attn.v_proj (in)
+25-01-12 11:53:56 | D |     - Rotating model.layers.10.self_attn.o_proj (out)
+25-01-12 11:53:56 | D |     - Rotating model.layers.10.proj_1st (in)
+25-01-12 11:53:56 | D |     - Rotating model.layers.10.proj_2nd (out)
+25-01-12 11:53:57 | D |   - Rotating model.layers.11
+25-01-12 11:53:57 | D |     - Rotating model.layers.11.self_attn.q_proj (in)
+25-01-12 11:53:57 | D |     - Rotating model.layers.11.self_attn.k_proj (in)
+25-01-12 11:53:57 | D |     - Rotating model.layers.11.self_attn.v_proj (in)
+25-01-12 11:53:57 | D |     - Rotating model.layers.11.self_attn.o_proj (out)
+25-01-12 11:53:57 | D |     - Rotating model.layers.11.proj_1st (in)
+25-01-12 11:53:57 | D |     - Rotating model.layers.11.proj_2nd (out)
+25-01-12 11:53:57 | D |   - Rotating model.layers.12
+25-01-12 11:53:57 | D |     - Rotating model.layers.12.self_attn.q_proj (in)
+25-01-12 11:53:57 | D |     - Rotating model.layers.12.self_attn.k_proj (in)
+25-01-12 11:53:57 | D |     - Rotating model.layers.12.self_attn.v_proj (in)
+25-01-12 11:53:57 | D |     - Rotating model.layers.12.self_attn.o_proj (out)
+25-01-12 11:53:57 | D |     - Rotating model.layers.12.proj_1st (in)
+25-01-12 11:53:57 | D |     - Rotating model.layers.12.proj_2nd (out)
+25-01-12 11:53:57 | D |   - Rotating model.layers.13
+25-01-12 11:53:57 | D |     - Rotating model.layers.13.self_attn.q_proj (in)
+25-01-12 11:53:57 | D |     - Rotating model.layers.13.self_attn.k_proj (in)
+25-01-12 11:53:57 | D |     - Rotating model.layers.13.self_attn.v_proj (in)
+25-01-12 11:53:57 | D |     - Rotating model.layers.13.self_attn.o_proj (out)
+25-01-12 11:53:57 | D |     - Rotating model.layers.13.proj_1st (in)
+25-01-12 11:53:57 | D |     - Rotating model.layers.13.proj_2nd (out)
+25-01-12 11:53:58 | D |   - Rotating model.layers.14
+25-01-12 11:53:58 | D |     - Rotating model.layers.14.self_attn.q_proj (in)
+25-01-12 11:53:58 | D |     - Rotating model.layers.14.self_attn.k_proj (in)
+25-01-12 11:53:58 | D |     - Rotating model.layers.14.self_attn.v_proj (in)
+25-01-12 11:53:58 | D |     - Rotating model.layers.14.self_attn.o_proj (out)
+25-01-12 11:53:58 | D |     - Rotating model.layers.14.proj_1st (in)
+25-01-12 11:53:58 | D |     - Rotating model.layers.14.proj_2nd (out)
+25-01-12 11:53:58 | D |   - Rotating model.layers.15
+25-01-12 11:53:58 | D |     - Rotating model.layers.15.self_attn.q_proj (in)
+25-01-12 11:53:58 | D |     - Rotating model.layers.15.self_attn.k_proj (in)
+25-01-12 11:53:58 | D |     - Rotating model.layers.15.self_attn.v_proj (in)
+25-01-12 11:53:58 | D |     - Rotating model.layers.15.self_attn.o_proj (out)
+25-01-12 11:53:58 | D |     - Rotating model.layers.15.proj_1st (in)
+25-01-12 11:53:58 | D |     - Rotating model.layers.15.proj_2nd (out)
+25-01-12 11:53:58 | D |   - Rotating model.layers.16
+25-01-12 11:53:58 | D |     - Rotating model.layers.16.self_attn.q_proj (in)
+25-01-12 11:53:58 | D |     - Rotating model.layers.16.self_attn.k_proj (in)
+25-01-12 11:53:58 | D |     - Rotating model.layers.16.self_attn.v_proj (in)
+25-01-12 11:53:58 | D |     - Rotating model.layers.16.self_attn.o_proj (out)
+25-01-12 11:53:58 | D |     - Rotating model.layers.16.proj_1st (in)
+25-01-12 11:53:58 | D |     - Rotating model.layers.16.proj_2nd (out)
+25-01-12 11:53:59 | D |   - Rotating model.layers.17
+25-01-12 11:53:59 | D |     - Rotating model.layers.17.self_attn.q_proj (in)
+25-01-12 11:53:59 | D |     - Rotating model.layers.17.self_attn.k_proj (in)
+25-01-12 11:53:59 | D |     - Rotating model.layers.17.self_attn.v_proj (in)
+25-01-12 11:53:59 | D |     - Rotating model.layers.17.self_attn.o_proj (out)
+25-01-12 11:53:59 | D |     - Rotating model.layers.17.proj_1st (in)
+25-01-12 11:53:59 | D |     - Rotating model.layers.17.proj_2nd (out)
+25-01-12 11:53:59 | D |   - Rotating model.layers.18
+25-01-12 11:53:59 | D |     - Rotating model.layers.18.self_attn.q_proj (in)
+25-01-12 11:53:59 | D |     - Rotating model.layers.18.self_attn.k_proj (in)
+25-01-12 11:53:59 | D |     - Rotating model.layers.18.self_attn.v_proj (in)
+25-01-12 11:53:59 | D |     - Rotating model.layers.18.self_attn.o_proj (out)
+25-01-12 11:53:59 | D |     - Rotating model.layers.18.proj_1st (in)
+25-01-12 11:53:59 | D |     - Rotating model.layers.18.proj_2nd (out)
+25-01-12 11:53:59 | D |   - Rotating model.layers.19
+25-01-12 11:53:59 | D |     - Rotating model.layers.19.self_attn.q_proj (in)
+25-01-12 11:53:59 | D |     - Rotating model.layers.19.self_attn.k_proj (in)
+25-01-12 11:53:59 | D |     - Rotating model.layers.19.self_attn.v_proj (in)
+25-01-12 11:53:59 | D |     - Rotating model.layers.19.self_attn.o_proj (out)
+25-01-12 11:53:59 | D |     - Rotating model.layers.19.proj_1st (in)
+25-01-12 11:54:00 | D |     - Rotating model.layers.19.proj_2nd (out)
+25-01-12 11:54:00 | D |   - Rotating model.layers.20
+25-01-12 11:54:00 | D |     - Rotating model.layers.20.self_attn.q_proj (in)
+25-01-12 11:54:00 | D |     - Rotating model.layers.20.self_attn.k_proj (in)
+25-01-12 11:54:00 | D |     - Rotating model.layers.20.self_attn.v_proj (in)
+25-01-12 11:54:00 | D |     - Rotating model.layers.20.self_attn.o_proj (out)
+25-01-12 11:54:00 | D |     - Rotating model.layers.20.proj_1st (in)
+25-01-12 11:54:00 | D |     - Rotating model.layers.20.proj_2nd (out)
+25-01-12 11:54:00 | D |   - Rotating model.layers.21
+25-01-12 11:54:00 | D |     - Rotating model.layers.21.self_attn.q_proj (in)
+25-01-12 11:54:00 | D |     - Rotating model.layers.21.self_attn.k_proj (in)
+25-01-12 11:54:00 | D |     - Rotating model.layers.21.self_attn.v_proj (in)
+25-01-12 11:54:00 | D |     - Rotating model.layers.21.self_attn.o_proj (out)
+25-01-12 11:54:00 | D |     - Rotating model.layers.21.proj_1st (in)
+25-01-12 11:54:00 | D |     - Rotating model.layers.21.proj_2nd (out)
+25-01-12 11:54:01 | D |   - Rotating lm_head (in)
+25-01-12 11:54:02 | I | * Reordering channels
+25-01-12 11:54:02 | I |   - Loading channel indices from runs/llm/cache/pileval.128x1024.[0-0]/reorder/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/tiny-llama-1.1b.pt
+25-01-12 11:54:03 | D |   Starting new HTTPS connection (1): hf-mirror.com:443
+25-01-12 11:54:04 | D |   https://hf-mirror.com:443 "GET /api/datasets/mit-han-lab/pile-val-backup HTTP/11" 200 403
+25-01-12 11:54:04 | D |   https://hf-mirror.com:443 "GET /api/datasets/mit-han-lab/pile-val-backup HTTP/11" 200 403
+25-01-12 11:54:05 | D |   https://hf-mirror.com:443 "GET /api/datasets/mit-han-lab/pile-val-backup/revision/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4 HTTP/11" 200 403
+25-01-12 11:54:05 | W |   Repo card metadata block was not found. Setting CardData to empty.
+25-01-12 11:54:05 | D |   https://hf-mirror.com:443 "HEAD /datasets/mit-han-lab/pile-val-backup/resolve/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4/.huggingface.yaml HTTP/11" 404 0
+25-01-12 11:54:05 | D |   Starting new HTTPS connection (1): datasets-server.hf-mirror.com:443
+25-01-12 11:54:11 | D |   https://datasets-server.hf-mirror.com:443 "GET /info?dataset=mit-han-lab/pile-val-backup HTTP/11" 302 0
+25-01-12 11:54:11 | D |   https://hf-mirror.com:443 "GET / HTTP/11" 200 None
+25-01-12 11:54:11 | D |   https://hf-mirror.com:443 "GET /api/datasets/mit-han-lab/pile-val-backup/revision/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4 HTTP/11" 200 403
+25-01-12 11:54:11 | D |   https://hf-mirror.com:443 "GET /api/datasets/mit-han-lab/pile-val-backup/tree/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4?recursive=False&expand=False HTTP/11" 200 418
+25-01-12 11:54:12 | D |   https://hf-mirror.com:443 "GET /api/datasets/mit-han-lab/pile-val-backup/tree/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4/data?recursive=False&expand=False HTTP/11" 404 79
+25-01-12 11:54:12 | D |   Starting new HTTPS connection (1): hf-mirror.com:443
+25-01-12 11:54:13 | D |   https://hf-mirror.com:443 "GET /api/datasets/mit-han-lab/pile-val-backup/revision/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4 HTTP/11" 200 403
+25-01-12 11:54:13 | D |   https://hf-mirror.com:443 "HEAD /datasets/mit-han-lab/pile-val-backup/resolve/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4/dataset_infos.json HTTP/11" 404 0
+25-01-12 11:54:13 | D |   Attempting to acquire lock 140519877217680 on /root/.cache/huggingface/datasets/_root_.cache_huggingface_datasets_mit-han-lab___pile-val-backup_default_0.0.0_2f5e46ae6a69cf0dce4b12f78241c408936ca0e4.lock
+25-01-12 11:54:13 | D |   Lock 140519877217680 acquired on /root/.cache/huggingface/datasets/_root_.cache_huggingface_datasets_mit-han-lab___pile-val-backup_default_0.0.0_2f5e46ae6a69cf0dce4b12f78241c408936ca0e4.lock
+25-01-12 11:54:13 | D |   open file: /root/.cache/huggingface/datasets/mit-han-lab___pile-val-backup/default/0.0.0/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4/dataset_info.json
+25-01-12 11:54:13 | D |   Attempting to release lock 140519877217680 on /root/.cache/huggingface/datasets/_root_.cache_huggingface_datasets_mit-han-lab___pile-val-backup_default_0.0.0_2f5e46ae6a69cf0dce4b12f78241c408936ca0e4.lock
+25-01-12 11:54:13 | D |   Lock 140519877217680 released on /root/.cache/huggingface/datasets/_root_.cache_huggingface_datasets_mit-han-lab___pile-val-backup_default_0.0.0_2f5e46ae6a69cf0dce4b12f78241c408936ca0e4.lock
+25-01-12 11:54:13 | D |   Attempting to acquire lock 140519877217968 on /root/.cache/huggingface/datasets/mit-han-lab___pile-val-backup/default/0.0.0/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4_builder.lock
+25-01-12 11:54:13 | D |   Lock 140519877217968 acquired on /root/.cache/huggingface/datasets/mit-han-lab___pile-val-backup/default/0.0.0/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4_builder.lock
+25-01-12 11:54:13 | D |   open file: /root/.cache/huggingface/datasets/mit-han-lab___pile-val-backup/default/0.0.0/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4/dataset_info.json
+25-01-12 11:54:13 | D |   Attempting to release lock 140519877217968 on /root/.cache/huggingface/datasets/mit-han-lab___pile-val-backup/default/0.0.0/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4_builder.lock
+25-01-12 11:54:13 | D |   Lock 140519877217968 released on /root/.cache/huggingface/datasets/mit-han-lab___pile-val-backup/default/0.0.0/2f5e46ae6a69cf0dce4b12f78241c408936ca0e4_builder.lock
+25-01-12 11:54:34 | D |   - Reordering module model.layers.0.mlp.down_proj
+25-01-12 11:54:38 | D |   - Reordering module model.layers.1.mlp.down_proj

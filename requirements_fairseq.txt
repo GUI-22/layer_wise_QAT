@@ -1,0 +1,20 @@
+torch>=2.2.0
+triton>=2.2.0
+numpy==1.23.0
+fairscale
+tiktoken
+sentencepiece
+ninja
+boto3
+iopath
+antlr4-python3-runtime==4.8
+colorama==0.4.6
+hydra-core==1.0.7
+lxml==5.3.0
+omegaconf==2.0.6
+portalocker==2.10.1
+sacrebleu==2.4.3
+
+# git+https://github.com/sunyt32/fairseq.git@d38c593
+# git+https://github.com/shumingma/infinibatch.git#egg=infinibatch
+# git+https://github.com/microsoft/torchscale.git#egg=torchscale

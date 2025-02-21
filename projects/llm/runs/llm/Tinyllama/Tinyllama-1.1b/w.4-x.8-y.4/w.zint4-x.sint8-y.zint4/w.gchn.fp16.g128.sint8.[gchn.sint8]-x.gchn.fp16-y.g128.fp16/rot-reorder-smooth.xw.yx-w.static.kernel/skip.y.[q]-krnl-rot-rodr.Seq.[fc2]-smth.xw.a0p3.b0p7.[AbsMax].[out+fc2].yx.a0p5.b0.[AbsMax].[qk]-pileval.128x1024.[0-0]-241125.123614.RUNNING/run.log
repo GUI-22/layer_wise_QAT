@@ -1,0 +1,763 @@
+24-11-25 12:36:14 | I | === Configurations ===
+24-11-25 12:36:14 | I | LlmRunConfig(
+24-11-25 12:36:14 | I |   model=LlmModelConfig(
+24-11-25 12:36:14 | I |     name=Tinyllama-1.1b,
+24-11-25 12:36:14 | I |     path=/data/gyy/TinyLlama,
+24-11-25 12:36:14 | I |     root=/dataset/models,
+24-11-25 12:36:14 | I |     local_path=/dataset/models/Tinyllama/Tinyllama-1.1b,
+24-11-25 12:36:14 | I |     local_root=/dataset/models,
+24-11-25 12:36:14 | I |     family=Tinyllama,
+24-11-25 12:36:14 | I |     size=1.1),
+24-11-25 12:36:14 | I |   eval=LlmEvalConfig(
+24-11-25 12:36:14 | I |     num_gpus=1,
+24-11-25 12:36:14 | I |     batch_size=8,
+24-11-25 12:36:14 | I |     output_root=runs,
+24-11-25 12:36:14 | I |     output_dirname=skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0]-241125.123614,
+24-11-25 12:36:14 | I |     attach_timestamp=True,
+24-11-25 12:36:14 | I |     timestamp=241125.123614,
+24-11-25 12:36:14 | I |     output_dirname_without_timestamp=skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0],
+24-11-25 12:36:14 | I |     tasks=['wikitext'],
+24-11-25 12:36:14 | I |     max_seq_length=-4096,
+24-11-25 12:36:14 | I |     evaluator=gptq),
+24-11-25 12:36:14 | I |   calib=LlmCalibConfig(
+24-11-25 12:36:14 | I |     data=pileval,
+24-11-25 12:36:14 | I |     num_samples=128,
+24-11-25 12:36:14 | I |     cache_root=runs,
+24-11-25 12:36:14 | I |     cache_dirpath=runs/llm/cache/pileval.128x1024.[0-0],
+24-11-25 12:36:14 | I |     dataset_path=mit-han-lab/pile-val-backup,
+24-11-25 12:36:14 | I |     seq_length=1024,
+24-11-25 12:36:14 | I |     min_seq_length=0,
+24-11-25 12:36:14 | I |     max_seq_length=0,
+24-11-25 12:36:14 | I |     local_dataset_path=/dataset/pile),
+24-11-25 12:36:14 | I |   quant=LlmQuantConfig(
+24-11-25 12:36:14 | I |     wgts=WeightQuantizerConfig(
+24-11-25 12:36:14 | I |       dtype=zint4,
+24-11-25 12:36:14 | I |       group_shapes=((1, -1, -1), (1, 128, -1)),
+24-11-25 12:36:14 | I |       group_scale_dtypes=(torch.float16, sint8),
+24-11-25 12:36:14 | I |       compute_dtype=sint8,
+24-11-25 12:36:14 | I |       compute_group_level=0,
+24-11-25 12:36:14 | I |       saturate_compute_dtype=False,
+24-11-25 12:36:14 | I |       exponent_scaling_level=2,
+24-11-25 12:36:14 | I |       skips=['embed', 'head', 'router'],
+24-11-25 12:36:14 | I |       static=True,
+24-11-25 12:36:14 | I |       calib_kernel=QuantizerKernelConfig(
+24-11-25 12:36:14 | I |         _kernels={'proj_1st': QuantGPTQConfig(includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'], damp_percentage=0.01, block_size=128, num_inv_tries=250, hessian_block_size=512), 'proj_2nd': QuantGPTQConfig(includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'], damp_percentage=0.01, block_size=128, num_inv_tries=250, hessian_block_size=512), 'proj_out': QuantGPTQConfig(includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'], damp_percentage=0.01, block_size=128, num_inv_tries=250, hessian_block_size=512), 'proj_qkv': QuantGPTQConfig(includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'], damp_percentage=0.01, block_size=128, num_inv_tries=250, hessian_block_size=512)},
+24-11-25 12:36:14 | I |         gptq=QuantGPTQConfig(
+24-11-25 12:36:14 | I |           includes=['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'],
+24-11-25 12:36:14 | I |           damp_percentage=0.01,
+24-11-25 12:36:14 | I |           block_size=128,
+24-11-25 12:36:14 | I |           num_inv_tries=250,
+24-11-25 12:36:14 | I |           hessian_block_size=512)),
+24-11-25 12:36:14 | I |       calib_range=DynamicRangeCalibConfig(
+24-11-25 12:36:14 | I |         degree=2,
+24-11-25 12:36:14 | I |         skips=[],
+24-11-25 12:36:14 | I |         objective=SearchBasedCalibObjective.OutputsError,
+24-11-25 12:36:14 | I |         strategy=SearchBasedCalibStrategy.Manual,
+24-11-25 12:36:14 | I |         granularity=SearchBasedCalibGranularity.Group,
+24-11-25 12:36:14 | I |         element_batch_size=64,
+24-11-25 12:36:14 | I |         sample_batch_size=-1,
+24-11-25 12:36:14 | I |         element_size=512,
+24-11-25 12:36:14 | I |         sample_size=-1,
+24-11-25 12:36:14 | I |         pre_reshape=True,
+24-11-25 12:36:14 | I |         outputs_device=cpu,
+24-11-25 12:36:14 | I |         allow_kernel_calib=False,
+24-11-25 12:36:14 | I |         ratio=1.0,
+24-11-25 12:36:14 | I |         max_shrink=0.2,
+24-11-25 12:36:14 | I |         max_expand=1.0,
+24-11-25 12:36:14 | I |         num_grids=80)),
+24-11-25 12:36:14 | I |     ipts=ActivationQuantizerConfig(
+24-11-25 12:36:14 | I |       dtype=sint8,
+24-11-25 12:36:14 | I |       group_shapes=((1, -1, -1),),
+24-11-25 12:36:14 | I |       group_scale_dtypes=(torch.float16,),
+24-11-25 12:36:14 | I |       compute_dtype=None,
+24-11-25 12:36:14 | I |       compute_group_level=-1,
+24-11-25 12:36:14 | I |       saturate_compute_dtype=False,
+24-11-25 12:36:14 | I |       exponent_scaling_level=1,
+24-11-25 12:36:14 | I |       skips=['embed', 'head', 'router'],
+24-11-25 12:36:14 | I |       static=False,
+24-11-25 12:36:14 | I |       calib_kernel=None,
+24-11-25 12:36:14 | I |       calib_range=None),
+24-11-25 12:36:14 | I |     opts=ActivationQuantizerConfig(
+24-11-25 12:36:14 | I |       dtype=zint4,
+24-11-25 12:36:14 | I |       group_shapes=((1, 128, -1),),
+24-11-25 12:36:14 | I |       group_scale_dtypes=(torch.float16,),
+24-11-25 12:36:14 | I |       compute_dtype=None,
+24-11-25 12:36:14 | I |       compute_group_level=-1,
+24-11-25 12:36:14 | I |       saturate_compute_dtype=False,
+24-11-25 12:36:14 | I |       exponent_scaling_level=1,
+24-11-25 12:36:14 | I |       skips=['attn_q'],
+24-11-25 12:36:14 | I |       static=False,
+24-11-25 12:36:14 | I |       calib_kernel=None,
+24-11-25 12:36:14 | I |       calib_range=None),
+24-11-25 12:36:14 | I |     rotation=QuantRotationConfig(
+24-11-25 12:36:14 | I |       random=False,
+24-11-25 12:36:14 | I |       transforms=[]),
+24-11-25 12:36:14 | I |     reorder=QuantReorderConfig(
+24-11-25 12:36:14 | I |       degree=2,
+24-11-25 12:36:14 | I |       skips=['proj_out', 'proj_qkv', 'residual'],
+24-11-25 12:36:14 | I |       objective=SearchBasedCalibObjective.OutputsError,
+24-11-25 12:36:14 | I |       strategy=SearchBasedCalibStrategy.Manual,
+24-11-25 12:36:14 | I |       granularity=SearchBasedCalibGranularity.Layer,
+24-11-25 12:36:14 | I |       element_batch_size=-1,
+24-11-25 12:36:14 | I |       sample_batch_size=-1,
+24-11-25 12:36:14 | I |       element_size=-1,
+24-11-25 12:36:14 | I |       sample_size=-1,
+24-11-25 12:36:14 | I |       pre_reshape=True,
+24-11-25 12:36:14 | I |       outputs_device=cpu,
+24-11-25 12:36:14 | I |       allow_kernel_calib=False,
+24-11-25 12:36:14 | I |       channel_metric=ChannelMetric.InputsAbsMax,
+24-11-25 12:36:14 | I |       channel_index=ChannelIndex.Sequential,
+24-11-25 12:36:14 | I |       dynamic=False),
+24-11-25 12:36:14 | I |     smooth=QuantSmoothConfig(
+24-11-25 12:36:14 | I |       xw=QuantSmoothCalibConfig(
+24-11-25 12:36:14 | I |         degree=2,
+24-11-25 12:36:14 | I |         skips=['proj_1st', 'proj_qkv'],
+24-11-25 12:36:14 | I |         objective=SearchBasedCalibObjective.OutputsError,
+24-11-25 12:36:14 | I |         strategy=SearchBasedCalibStrategy.Manual,
+24-11-25 12:36:14 | I |         granularity=SearchBasedCalibGranularity.Layer,
+24-11-25 12:36:14 | I |         element_batch_size=-1,
+24-11-25 12:36:14 | I |         sample_batch_size=-1,
+24-11-25 12:36:14 | I |         element_size=-1,
+24-11-25 12:36:14 | I |         sample_size=-1,
+24-11-25 12:36:14 | I |         pre_reshape=True,
+24-11-25 12:36:14 | I |         outputs_device=cpu,
+24-11-25 12:36:14 | I |         allow_kernel_calib=False,
+24-11-25 12:36:14 | I |         ranges=[(<RangeMode.AbsMax: 1>, <RangeMode.AbsMax: 1>)],
+24-11-25 12:36:14 | I |         x_ranges=[<RangeMode.AbsMax: 1>],
+24-11-25 12:36:14 | I |         w_ranges=[<RangeMode.AbsMax: 1>],
+24-11-25 12:36:14 | I |         alpha=0.3,
+24-11-25 12:36:14 | I |         beta=0.7,
+24-11-25 12:36:14 | I |         num_grids=20),
+24-11-25 12:36:14 | I |       yx=QuantSmoothCalibConfig(
+24-11-25 12:36:14 | I |         degree=2,
+24-11-25 12:36:14 | I |         skips=[],
+24-11-25 12:36:14 | I |         objective=SearchBasedCalibObjective.OutputsError,
+24-11-25 12:36:14 | I |         strategy=SearchBasedCalibStrategy.Manual,
+24-11-25 12:36:14 | I |         granularity=SearchBasedCalibGranularity.Layer,
+24-11-25 12:36:14 | I |         element_batch_size=-1,
+24-11-25 12:36:14 | I |         sample_batch_size=-1,
+24-11-25 12:36:14 | I |         element_size=-1,
+24-11-25 12:36:14 | I |         sample_size=-1,
+24-11-25 12:36:14 | I |         pre_reshape=True,
+24-11-25 12:36:14 | I |         outputs_device=cpu,
+24-11-25 12:36:14 | I |         allow_kernel_calib=False,
+24-11-25 12:36:14 | I |         ranges=[(<RangeMode.AbsMax: 1>, <RangeMode.AbsMax: 1>)],
+24-11-25 12:36:14 | I |         x_ranges=[<RangeMode.AbsMax: 1>],
+24-11-25 12:36:14 | I |         w_ranges=[<RangeMode.AbsMax: 1>],
+24-11-25 12:36:14 | I |         alpha=0.5,
+24-11-25 12:36:14 | I |         beta=0.0,
+24-11-25 12:36:14 | I |         num_grids=20)),
+24-11-25 12:36:14 | I |     bias_correction=False,
+24-11-25 12:36:14 | I |     post_rotary=True,
+24-11-25 12:36:14 | I |     develop_dtype=torch.float32,
+24-11-25 12:36:14 | I |     select_wgts=None,
+24-11-25 12:36:14 | I |     select_ipts=None,
+24-11-25 12:36:14 | I |     select_opts=None,
+24-11-25 12:36:14 | I |     keywords_i={'proj_qkv': ['q_proj', 'k_proj', 'v_proj'], 'proj_out': ['out_proj', 'o_proj'], 'proj_1st': ['fc1', 'up_proj', 'gate_proj', 'w1', 'w3'], 'proj_2nd': ['fc2', 'down_proj', 'w2'], 'head': ['output', 'score', 'qa_outputs'], 'embed': ['embed', 'lm_head', 'embed_out'], 'router': ['block_sparse_moe']},
+24-11-25 12:36:14 | I |     keywords_w={'proj_qkv': ['q_proj', 'k_proj', 'v_proj'], 'proj_out': ['out_proj', 'o_proj'], 'proj_1st': ['fc1', 'up_proj', 'gate_proj', 'w1', 'w3'], 'proj_2nd': ['fc2', 'down_proj', 'w2'], 'head': ['output', 'score', 'qa_outputs'], 'embed': ['embed', 'lm_head', 'embed_out'], 'router': ['block_sparse_moe.gate']},
+24-11-25 12:36:14 | I |     keywords_o={'attn_q': ['q_rotary_emb'], 'attn_k': ['k_rotary_emb'], 'attn_v': ['v_proj']},
+24-11-25 12:36:14 | I |     module_types_i=(<class 'torch.nn.modules.linear.Linear'>, <class 'transformers.models.mixtral.modeling_mixtral.MixtralSparseMoeBlock'>),
+24-11-25 12:36:14 | I |     module_types_w=(<class 'torch.nn.modules.linear.Linear'>,),
+24-11-25 12:36:14 | I |     module_types_o=(<class 'torch.nn.modules.linear.Linear'>, <class 'lmquant.llm.nn.attention.RotaryEmbedding'>),
+24-11-25 12:36:14 | I |     num_hidden_layers=-1),
+24-11-25 12:36:14 | I |   seed=12345,
+24-11-25 12:36:14 | I |   save_model=True,
+24-11-25 12:36:14 | I |   output_dirpath=runs/llm/Tinyllama/Tinyllama-1.1b/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/rot-reorder-smooth.xw.yx-w.static.kernel/skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0]-241125.123614,
+24-11-25 12:36:14 | I |   cache_dirpath=LlmQuantCachePath(rotation='runs/llm/cache/rotation/hadamard', reorder='runs/llm/cache/pileval.128x1024.[0-0]/reorder/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]', smooth='runs/llm/cache/pileval.128x1024.[0-0]/smooth/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/smooth.xw.OutputsError.Manual.Layer.d2.en1.sn1-yx.OutputsError.Manual.Layer.d2.en1.sn1/smooth.xw.[x.AbsMax.w.AbsMax]-yx.[x.AbsMax.w.AbsMax]/smooth.xw.a0p3.b0p7-yx.a0p5.b0/smooth.xw.skip.[proj_1st+proj_qkv]-yx.skip.[]', wgts='runs/llm/cache/pileval.128x1024.[0-0]/wgts/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/smooth.xw.OutputsError.Manual.Layer.d2.en1.sn1-yx.OutputsError.Manual.Layer.d2.en1.sn1/smooth.xw.[x.AbsMax.w.AbsMax]-yx.[x.AbsMax.w.AbsMax]/smooth.xw.a0p3.b0p7-yx.a0p5.b0/smooth.xw.skip.[proj_1st+proj_qkv]-yx.skip.[]/w.kernel.gptq.d0p01.b128/w.kernel.gptq.include.[proj_1st+proj_2nd+proj_out+proj_qkv]/w.range.OutputsError.Manual.Group.d2.e512.sn1/w.range.r.[1].static/w.range.skip.[]', acts=''),
+24-11-25 12:36:14 | I |   cache_path=LlmQuantCachePath(rotation='runs/llm/cache/rotation/hadamard/Tinyllama-1.1b.pt', reorder='runs/llm/cache/pileval.128x1024.[0-0]/reorder/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/Tinyllama-1.1b.pt', smooth='runs/llm/cache/pileval.128x1024.[0-0]/smooth/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/smooth.xw.OutputsError.Manual.Layer.d2.en1.sn1-yx.OutputsError.Manual.Layer.d2.en1.sn1/smooth.xw.[x.AbsMax.w.AbsMax]-yx.[x.AbsMax.w.AbsMax]/smooth.xw.a0p3.b0p7-yx.a0p5.b0/smooth.xw.skip.[proj_1st+proj_qkv]-yx.skip.[]/Tinyllama-1.1b.pt', wgts='runs/llm/cache/pileval.128x1024.[0-0]/wgts/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/w.skip.[embed+head+router]-x.skip.[embed+head+router]-y.skip.[attn_q]/rotate.hadamard/reorder.OutputsError.Manual.Layer.d2.en1.sn1/reorder.InputsAbsMax.Sequential/reorder.skip.[proj_out+proj_qkv+residual]/smooth.xw.OutputsError.Manual.Layer.d2.en1.sn1-yx.OutputsError.Manual.Layer.d2.en1.sn1/smooth.xw.[x.AbsMax.w.AbsMax]-yx.[x.AbsMax.w.AbsMax]/smooth.xw.a0p3.b0p7-yx.a0p5.b0/smooth.xw.skip.[proj_1st+proj_qkv]-yx.skip.[]/w.kernel.gptq.d0p01.b128/w.kernel.gptq.include.[proj_1st+proj_2nd+proj_out+proj_qkv]/w.range.OutputsError.Manual.Group.d2.e512.sn1/w.range.r.[1].static/w.range.skip.[]/Tinyllama-1.1b.pt', acts=''),
+24-11-25 12:36:14 | I |   fairseq_args=/data/gyy/lmquant-main/projects/llm/configs/fairseq_args.json,
+24-11-25 12:36:14 | I |   gen_teacher_opts=False,
+24-11-25 12:36:14 | I |   enable_cache=False,
+24-11-25 12:36:14 | I |   with_prepocess=False)
+24-11-25 12:36:14 | I | === Dumped Configurations ===
+24-11-25 12:36:14 | I | { 'calib': { 'cache_root': 'runs',
+24-11-25 12:36:14 | I |              'data': 'pileval',
+24-11-25 12:36:14 | I |              'dataset_path': 'mit-han-lab/pile-val-backup',
+24-11-25 12:36:14 | I |              'local_dataset_path': '/dataset/pile',
+24-11-25 12:36:14 | I |              'max_seq_length': 0,
+24-11-25 12:36:14 | I |              'min_seq_length': 0,
+24-11-25 12:36:14 | I |              'num_samples': 128,
+24-11-25 12:36:14 | I |              'seq_length': 1024},
+24-11-25 12:36:14 | I |   'enable_cache': False,
+24-11-25 12:36:14 | I |   'eval': { 'attach_timestamp': True,
+24-11-25 12:36:14 | I |             'batch_size': 8,
+24-11-25 12:36:14 | I |             'evaluator': 'gptq',
+24-11-25 12:36:14 | I |             'max_seq_length': -4096,
+24-11-25 12:36:14 | I |             'num_gpus': 1,
+24-11-25 12:36:14 | I |             'output_dirname': 'skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0]-241125.123614',
+24-11-25 12:36:14 | I |             'output_root': 'runs',
+24-11-25 12:36:14 | I |             'tasks': ['wikitext']},
+24-11-25 12:36:14 | I |   'fairseq_args': '/data/gyy/lmquant-main/projects/llm/configs/fairseq_args.json',
+24-11-25 12:36:14 | I |   'gen_teacher_opts': False,
+24-11-25 12:36:14 | I |   'model': { 'local_path': '/dataset/models/Tinyllama/Tinyllama-1.1b',
+24-11-25 12:36:14 | I |              'local_root': '/dataset/models',
+24-11-25 12:36:14 | I |              'name': 'Tinyllama-1.1b',
+24-11-25 12:36:14 | I |              'path': '/data/gyy/TinyLlama',
+24-11-25 12:36:14 | I |              'root': '/dataset/models'},
+24-11-25 12:36:14 | I |   'quant': { 'bias_correction': False,
+24-11-25 12:36:14 | I |              'develop_dtype': 'torch.float32',
+24-11-25 12:36:14 | I |              'enable_reorder': True,
+24-11-25 12:36:14 | I |              'enable_rotation': True,
+24-11-25 12:36:14 | I |              'enable_select_ipts': False,
+24-11-25 12:36:14 | I |              'enable_select_opts': False,
+24-11-25 12:36:14 | I |              'enable_select_wgts': False,
+24-11-25 12:36:14 | I |              'enable_smooth': True,
+24-11-25 12:36:14 | I |              'ipts': { 'compute_dtype': None,
+24-11-25 12:36:14 | I |                        'compute_group_level': -1,
+24-11-25 12:36:14 | I |                        'dtype': 'sint8',
+24-11-25 12:36:14 | I |                        'enable_calib_range': False,
+24-11-25 12:36:14 | I |                        'group_scale_dtypes': ['torch.float16'],
+24-11-25 12:36:14 | I |                        'group_shapes': [[1, -1, -1]],
+24-11-25 12:36:14 | I |                        'saturate_compute_dtype': False,
+24-11-25 12:36:14 | I |                        'skips': ['embed', 'head', 'router'],
+24-11-25 12:36:14 | I |                        'static': False},
+24-11-25 12:36:14 | I |              'opts': { 'compute_dtype': None,
+24-11-25 12:36:14 | I |                        'compute_group_level': -1,
+24-11-25 12:36:14 | I |                        'dtype': 'zint4',
+24-11-25 12:36:14 | I |                        'enable_calib_range': False,
+24-11-25 12:36:14 | I |                        'group_scale_dtypes': ['torch.float16'],
+24-11-25 12:36:14 | I |                        'group_shapes': [[1, 128, -1]],
+24-11-25 12:36:14 | I |                        'saturate_compute_dtype': False,
+24-11-25 12:36:14 | I |                        'skips': ['attn_q'],
+24-11-25 12:36:14 | I |                        'static': False},
+24-11-25 12:36:14 | I |              'post_rotary': True,
+24-11-25 12:36:14 | I |              'reorder': { 'allow_kernel_calib': False,
+24-11-25 12:36:14 | I |                           'channel_index': 'Sequential',
+24-11-25 12:36:14 | I |                           'channel_metric': 'InputsAbsMax',
+24-11-25 12:36:14 | I |                           'degree': 2,
+24-11-25 12:36:14 | I |                           'dynamic': False,
+24-11-25 12:36:14 | I |                           'element_batch_size': -1,
+24-11-25 12:36:14 | I |                           'element_size': -1,
+24-11-25 12:36:14 | I |                           'outputs_device': 'cpu',
+24-11-25 12:36:14 | I |                           'pre_reshape': True,
+24-11-25 12:36:14 | I |                           'sample_batch_size': -1,
+24-11-25 12:36:14 | I |                           'sample_size': -1,
+24-11-25 12:36:14 | I |                           'skips': ['proj_out', 'proj_qkv', 'residual'],
+24-11-25 12:36:14 | I |                           'strategy': 'Manual'},
+24-11-25 12:36:14 | I |              'rotation': {'random': False, 'transforms': []},
+24-11-25 12:36:14 | I |              'smooth': { 'enable_xw': True,
+24-11-25 12:36:14 | I |                          'enable_yx': True,
+24-11-25 12:36:14 | I |                          'xw': { 'allow_kernel_calib': False,
+24-11-25 12:36:14 | I |                                  'alpha': 0.3,
+24-11-25 12:36:14 | I |                                  'beta': 0.7,
+24-11-25 12:36:14 | I |                                  'degree': 2,
+24-11-25 12:36:14 | I |                                  'element_batch_size': -1,
+24-11-25 12:36:14 | I |                                  'element_size': -1,
+24-11-25 12:36:14 | I |                                  'granularity': 'Layer',
+24-11-25 12:36:14 | I |                                  'num_grids': 20,
+24-11-25 12:36:14 | I |                                  'objective': 'OutputsError',
+24-11-25 12:36:14 | I |                                  'outputs_device': 'cpu',
+24-11-25 12:36:14 | I |                                  'pre_reshape': True,
+24-11-25 12:36:14 | I |                                  'ranges': [['AbsMax', 'AbsMax']],
+24-11-25 12:36:14 | I |                                  'sample_batch_size': -1,
+24-11-25 12:36:14 | I |                                  'sample_size': -1,
+24-11-25 12:36:14 | I |                                  'skips': ['proj_1st', 'proj_qkv'],
+24-11-25 12:36:14 | I |                                  'strategy': 'Manual'},
+24-11-25 12:36:14 | I |                          'yx': { 'allow_kernel_calib': False,
+24-11-25 12:36:14 | I |                                  'alpha': 0.5,
+24-11-25 12:36:14 | I |                                  'beta': 0.0,
+24-11-25 12:36:14 | I |                                  'degree': 2,
+24-11-25 12:36:14 | I |                                  'element_batch_size': -1,
+24-11-25 12:36:14 | I |                                  'element_size': -1,
+24-11-25 12:36:14 | I |                                  'granularity': 'Layer',
+24-11-25 12:36:14 | I |                                  'num_grids': 20,
+24-11-25 12:36:14 | I |                                  'objective': 'OutputsError',
+24-11-25 12:36:14 | I |                                  'outputs_device': 'cpu',
+24-11-25 12:36:14 | I |                                  'pre_reshape': True,
+24-11-25 12:36:14 | I |                                  'ranges': [['AbsMax', 'AbsMax']],
+24-11-25 12:36:14 | I |                                  'sample_batch_size': -1,
+24-11-25 12:36:14 | I |                                  'sample_size': -1,
+24-11-25 12:36:14 | I |                                  'skips': [],
+24-11-25 12:36:14 | I |                                  'strategy': 'Manual'}},
+24-11-25 12:36:14 | I |              'wgts': { 'calib_kernel': { 'enable_gptq': True,
+24-11-25 12:36:14 | I |                                          'gptq': { 'block_size': 128,
+24-11-25 12:36:14 | I |                                                    'damp_percentage': 0.01,
+24-11-25 12:36:14 | I |                                                    'hessian_block_size': 512,
+24-11-25 12:36:14 | I |                                                    'includes': ['proj_1st', 'proj_2nd', 'proj_out', 'proj_qkv'],
+24-11-25 12:36:14 | I |                                                    'num_inv_tries': 250}},
+24-11-25 12:36:14 | I |                        'calib_range': { 'allow_kernel_calib': False,
+24-11-25 12:36:14 | I |                                         'degree': 2,
+24-11-25 12:36:14 | I |                                         'element_batch_size': 64,
+24-11-25 12:36:14 | I |                                         'element_size': 512,
+24-11-25 12:36:14 | I |                                         'granularity': 'Group',
+24-11-25 12:36:14 | I |                                         'max_expand': 1.0,
+24-11-25 12:36:14 | I |                                         'max_shrink': 0.2,
+24-11-25 12:36:14 | I |                                         'num_grids': 80,
+24-11-25 12:36:14 | I |                                         'objective': 'OutputsError',
+24-11-25 12:36:14 | I |                                         'outputs_device': 'cpu',
+24-11-25 12:36:14 | I |                                         'pre_reshape': True,
+24-11-25 12:36:14 | I |                                         'ratio': 1.0,
+24-11-25 12:36:14 | I |                                         'sample_batch_size': -1,
+24-11-25 12:36:14 | I |                                         'sample_size': -1,
+24-11-25 12:36:14 | I |                                         'skips': [],
+24-11-25 12:36:14 | I |                                         'strategy': 'Manual'},
+24-11-25 12:36:14 | I |                        'compute_dtype': 'sint8',
+24-11-25 12:36:14 | I |                        'compute_group_level': 0,
+24-11-25 12:36:14 | I |                        'dtype': 'zint4',
+24-11-25 12:36:14 | I |                        'enable_calib_kernel': True,
+24-11-25 12:36:14 | I |                        'enable_calib_range': True,
+24-11-25 12:36:14 | I |                        'group_scale_dtypes': ['torch.float16', 'sint8'],
+24-11-25 12:36:14 | I |                        'group_shapes': [[1, -1, -1], [1, 128, -1]],
+24-11-25 12:36:14 | I |                        'saturate_compute_dtype': False,
+24-11-25 12:36:14 | I |                        'skips': ['embed', 'head', 'router']}},
+24-11-25 12:36:14 | I |   'save_model': True,
+24-11-25 12:36:14 | I |   'seed': 12345,
+24-11-25 12:36:14 | I |   'with_prepocess': False}
+24-11-25 12:36:14 | I | === Output Directory ===
+24-11-25 12:36:14 | I | runs/llm/Tinyllama/Tinyllama-1.1b/w.4-x.8-y.4/w.zint4-x.sint8-y.zint4/w.gchn.fp16.g128.sint8.[gchn.sint8]-x.gchn.fp16-y.g128.fp16/rot-reorder-smooth.xw.yx-w.static.kernel/skip.y.[q]-krnl-rot-rodr.Seq.[fc2]-smth.xw.a0p3.b0p7.[AbsMax].[out+fc2].yx.a0p5.b0.[AbsMax].[qk]-pileval.128x1024.[0-0]-241125.123614
+24-11-25 12:36:14 | I | === Start Evaluating ===
+24-11-25 12:36:14 | I | * Building model Tinyllama-1.1b from /data/gyy/TinyLlama
+24-11-25 12:36:15 | I | We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.0.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.1.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.2.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.3.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.4.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.5.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.6.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.7.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.8.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.9.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.10.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.11.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.12.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.13.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.14.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.15.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.16.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.17.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.18.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.19.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.20.self_attn
+24-11-25 12:36:16 | I | - Patching LlamaSdpaAttention.forward in model.layers.21.self_attn
+24-11-25 12:36:16 | I | * Development dtype is torch.float32
+24-11-25 12:36:16 | I |   * Begin to QAT
+24-11-25 12:36:17 | D | Setting JobRuntime:name=UNKNOWN_NAME
+24-11-25 12:36:17 | D | Setting JobRuntime:name=utils
+24-11-25 12:36:22 | I | distributed init (rank 0): env://
+24-11-25 12:36:22 | I | initialized host 3fb0cc53fbf9 as rank 0
+24-11-25 12:36:23 | I | nvidia-smi stats: {'gpu_0_mem_used_gb': 0.001953125, 'gpu_1_mem_used_gb': 0.001953125, 'gpu_2_mem_used_gb': 0.001953125, 'gpu_3_mem_used_gb': 0.0, 'gpu_4_mem_used_gb': 0.0, 'gpu_5_mem_used_gb': 0.0, 'gpu_6_mem_used_gb': 2.521484375, 'gpu_7_mem_used_gb': 0.001953125}
+24-11-25 12:36:23 | I | {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 1, 'log_format': 'simple', 'log_file': None, 'tensorboard_logdir': None, 'wandb_project': 'layer_wise_quant', 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': True, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'user_dir': None, 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma', 'log_nvidia_smi': False}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None, 'is_moe': False, 'is_model_parallel': False}, 'distributed_training': {'_name': None, 'distributed_world_size': 1, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'env://', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': True, 'ddp_backend': 'pytorch_ddp', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_algorithm': 'LocalSGD', 'localsgd_frequency': 3, 'nprocs_per_node': 1, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'zero_group_size': -1, 'save_zero_ckpt_fast': False, 'fp16': True, 'memory_efficient_fp16': True, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'use_sharded_state': False}, 'dataset': {'_name': None, 'num_workers': 1, 'num_workers_valid': 0, 'skip_invalid_size_inputs_valid_test': False, 'max_tokens': None, 'batch_size': 32, 'required_batch_size_multiple': 8, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'combine_valid_subsets': None, 'ignore_unused_valid_subsets': False, 'validate_interval': 1, 'validate_interval_updates': 20, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': False, 'max_tokens_valid': None, 'batch_size_valid': 32, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 100, 'stop_time_hours': 0.0, 'clip_norm': 2.0, 'sentence_avg': False, 'update_freq': [2], 'lr': [0.00015], 'stop_min_lr': -1.0, 'use_bmuf': False}, 'checkpoint': {'_name': None, 'save_dir': 'checkpoints', 'restore_file': 'checkpoint_last.pt', 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 1000, 'keep_interval_updates': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': True, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_best_checkpoints': False, 'no_save_optimizer_state': False, 'no_save_optimizer_state_on_training_finished': False, 'symlink_best_and_last_checkpoints': False, 'best_checkpoint_metric': 'loss_valid', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': False, 'write_checkpoints_asynchronously': False, 's3_upload_path': None, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 1}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'input_quant_method': '', 'input_bits': -1, 'weight_quant_method': '', 'weight_bits': -1, 'smoothquant': False, 'smoothquant_alpha': 0.5, 'smoothquant_bitnet': False, 'input_bits_post': 8, 'hadamard_group': -1, 'cal_input_stat': 'none', 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807, 'stats_path': None, 'max_valid_steps': None}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': {'_name': 'tiny_llama', 'load_ckpt': None, 'batch_size': 32, 'share_input_output_embed': False, 'sliding_window': None, 'rope_theta': 10000.0, 'checkpoint_activations': False, 'tokens_per_sample': 512, 'model_parallel_size': 1}, 'task': {'_name': 'kd', 'path_to_labels': None, 'data': '/data/gyy/YOCO/data_without_preprocess', 'tokens_per_sample': 512, 'batch_size_in_quant': 8, 'max_target_positions': None, 'llama_model': None, 'quant_acts_when_training': True, 'tiktoken_model': 'cl100k_base', 'batch_read_ahead': 1, 'pad_to_max_len': True, 'absolute_path': False, 'tokenizer_pad_to_multiple': 1, 'seed': 1, 'batch_size': 32}, 'criterion': {'_name': 'mse', 'sentence_avg': False}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9, 0.95)', 'adam_eps': 1e-06, 'weight_decay': 0.05, 'use_old_adam': False, 'fp16_adam_stats': False, 'tpu': False, 'bf16': False, 'lr': [0.00015], 'block_wise': False}, 'lr_scheduler': {'_name': 'polynomial_decay', 'warmup_updates': 50, 'force_anneal': None, 'end_learning_rate': 0.0, 'power': 1.0, 'total_num_update': 300000.0, 'lr': [0.00015]}, 'scoring': {'_name': 'bleu', 'pad': 1, 'eos': 2, 'unk': 3}, 'bpe': None, 'tokenizer': None}
+24-11-25 12:36:23 | I | LlamaModelDecoderLayer(
+  (decoder): LlamaDecoderLayerInFairseq(
+    (model): LlamaDecoderLayer(
+      (self_attn): LlamaSdpaAttention(
+        (q_proj): Linear(in_features=2048, out_features=2048, bias=False)
+        (k_proj): Linear(in_features=2048, out_features=256, bias=False)
+        (v_proj): Linear(in_features=2048, out_features=256, bias=False)
+        (o_proj): Linear(in_features=2048, out_features=2048, bias=False)
+        (rotary_emb): LlamaRotaryEmbedding()
+        (q_rotary_emb): RotaryEmbedding()
+        (k_rotary_emb): RotaryEmbedding()
+      )
+      (mlp): LlamaMLP(
+        (gate_proj): Linear(in_features=2048, out_features=5632, bias=False)
+        (up_proj): Linear(in_features=2048, out_features=5632, bias=False)
+        (down_proj): Linear(in_features=5632, out_features=2048, bias=False)
+        (act_fn): SiLU()
+      )
+      (input_layernorm): LlamaRMSNorm((2048,), eps=1e-05)
+      (post_attention_layernorm): LlamaRMSNorm((2048,), eps=1e-05)
+    )
+  )
+  (model): LlamaDecoderLayerInFairseq(
+    (model): LlamaDecoderLayer(
+      (self_attn): LlamaSdpaAttention(
+        (q_proj): Linear(in_features=2048, out_features=2048, bias=False)
+        (k_proj): Linear(in_features=2048, out_features=256, bias=False)
+        (v_proj): Linear(in_features=2048, out_features=256, bias=False)
+        (o_proj): Linear(in_features=2048, out_features=2048, bias=False)
+        (rotary_emb): LlamaRotaryEmbedding()
+        (q_rotary_emb): RotaryEmbedding()
+        (k_rotary_emb): RotaryEmbedding()
+      )
+      (mlp): LlamaMLP(
+        (gate_proj): Linear(in_features=2048, out_features=5632, bias=False)
+        (up_proj): Linear(in_features=2048, out_features=5632, bias=False)
+        (down_proj): Linear(in_features=5632, out_features=2048, bias=False)
+        (act_fn): SiLU()
+      )
+      (input_layernorm): LlamaRMSNorm((2048,), eps=1e-05)
+      (post_attention_layernorm): LlamaRMSNorm((2048,), eps=1e-05)
+    )
+  )
+)
+24-11-25 12:36:23 | I | task: KDTask
+24-11-25 12:36:23 | I | model: LlamaModelDecoderLayer
+24-11-25 12:36:23 | I | criterion: MSECriterion
+24-11-25 12:36:23 | I | num. non-expert model params: 44,044,288 (num. trained: 44,044,288)
+24-11-25 12:36:23 | I | num. expert model params: 0 (num. trained: 0)
+24-11-25 12:36:23 | I | nvidia-smi stats: {'gpu_0_mem_used_gb': 0.001953125, 'gpu_1_mem_used_gb': 0.001953125, 'gpu_2_mem_used_gb': 0.001953125, 'gpu_3_mem_used_gb': 0.0, 'gpu_4_mem_used_gb': 0.0, 'gpu_5_mem_used_gb': 0.0, 'gpu_6_mem_used_gb': 4.658203125, 'gpu_7_mem_used_gb': 0.001953125}
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.weight <- model.model.self_attn.q_proj.weight
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- decoder.model.self_attn.k_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- decoder.model.self_attn.v_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- decoder.model.self_attn.o_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- decoder.model.mlp.gate_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- decoder.model.mlp.up_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- decoder.model.mlp.down_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.self_attn.q_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.self_attn.k_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.self_attn.v_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.self_attn.o_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.mlp.gate_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.mlp.up_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.q_proj.bias <- model.model.mlp.down_proj.bias
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.k_proj.weight <- model.model.self_attn.k_proj.weight
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.v_proj.weight <- model.model.self_attn.v_proj.weight
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.self_attn.o_proj.weight <- model.model.self_attn.o_proj.weight
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.mlp.gate_proj.weight <- model.model.mlp.gate_proj.weight
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.mlp.up_proj.weight <- model.model.mlp.up_proj.weight
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.mlp.down_proj.weight <- model.model.mlp.down_proj.weight
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.input_layernorm.weight <- model.model.input_layernorm.weight
+24-11-25 12:36:23 | I | detected shared parameter: decoder.model.post_attention_layernorm.weight <- model.model.post_attention_layernorm.weight
+24-11-25 12:36:23 | I | nvidia-smi stats: {'gpu_0_mem_used_gb': 0.001953125, 'gpu_1_mem_used_gb': 0.001953125, 'gpu_2_mem_used_gb': 0.001953125, 'gpu_3_mem_used_gb': 0.0, 'gpu_4_mem_used_gb': 0.0, 'gpu_5_mem_used_gb': 0.0, 'gpu_6_mem_used_gb': 4.69921875, 'gpu_7_mem_used_gb': 0.001953125}
+24-11-25 12:36:23 | I | ***********************CUDA enviroments for all 1 workers***********************
+24-11-25 12:36:23 | I | rank   0: capabilities =  8.6  ; total memory = 23.691 GB ; name = NVIDIA GeForce RTX 3090                 
+24-11-25 12:36:23 | I | ***********************CUDA enviroments for all 1 workers***********************
+24-11-25 12:36:23 | I | training on 1 devices (GPUs/TPUs)
+24-11-25 12:36:23 | I | max tokens per GPU = None and batch size per GPU = 32
+24-11-25 12:36:23 | I | nvidia-smi stats: {'gpu_0_mem_used_gb': 0.001953125, 'gpu_1_mem_used_gb': 0.001953125, 'gpu_2_mem_used_gb': 0.001953125, 'gpu_3_mem_used_gb': 0.0, 'gpu_4_mem_used_gb': 0.0, 'gpu_5_mem_used_gb': 0.0, 'gpu_6_mem_used_gb': 4.69921875, 'gpu_7_mem_used_gb': 0.001953125}
+24-11-25 12:36:23 | I | loading train data for epoch 1
+24-11-25 12:36:26 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/0.jsonl 
+ ***
+24-11-25 12:36:26 | I | *** 
+ total_rows = 700 
+ ***
+24-11-25 12:36:26 | I | current row num = 0
+24-11-25 12:36:26 | I | in forward_and_gen_teacher_outputs, Start iterating over samples
+24-11-25 12:36:26 | I | current row num = 32
+24-11-25 12:36:27 | I | current row num = 64
+24-11-25 12:36:28 | I | current row num = 96
+24-11-25 12:36:29 | I | current row num = 128
+24-11-25 12:36:29 | I | current row num = 160
+24-11-25 12:36:30 | I | current row num = 192
+24-11-25 12:36:31 | I | current row num = 224
+24-11-25 12:36:32 | I | current row num = 256
+24-11-25 12:36:33 | I | current row num = 288
+24-11-25 12:36:34 | I | current row num = 320
+24-11-25 12:36:34 | I | current row num = 352
+24-11-25 12:36:35 | I | current row num = 384
+24-11-25 12:36:36 | I | current row num = 416
+24-11-25 12:36:37 | I | current row num = 448
+24-11-25 12:36:38 | I | current row num = 480
+24-11-25 12:36:39 | I | current row num = 512
+24-11-25 12:36:40 | I | current row num = 544
+24-11-25 12:36:40 | I | current row num = 576
+24-11-25 12:36:41 | I | current row num = 608
+24-11-25 12:36:42 | I | current row num = 640
+24-11-25 12:36:44 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/1.jsonl 
+ ***
+24-11-25 12:36:44 | I | *** 
+ total_rows = 241 
+ ***
+24-11-25 12:36:44 | I | current row num = 0
+24-11-25 12:36:44 | I | current row num = 32
+24-11-25 12:36:45 | I | current row num = 64
+24-11-25 12:36:46 | I | current row num = 96
+24-11-25 12:36:47 | I | current row num = 128
+24-11-25 12:36:47 | I | current row num = 160
+24-11-25 12:36:48 | I | current row num = 192
+24-11-25 12:36:49 | I | current row num = 224
+24-11-25 12:36:51 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/2.jsonl 
+ ***
+24-11-25 12:36:51 | I | *** 
+ total_rows = 509 
+ ***
+24-11-25 12:36:51 | I | current row num = 0
+24-11-25 12:36:52 | I | current row num = 32
+24-11-25 12:36:52 | I | current row num = 64
+24-11-25 12:36:53 | I | current row num = 96
+24-11-25 12:36:54 | I | current row num = 128
+24-11-25 12:36:55 | I | current row num = 160
+24-11-25 12:36:56 | I | current row num = 192
+24-11-25 12:36:57 | I | current row num = 224
+24-11-25 12:36:58 | I | current row num = 256
+24-11-25 12:36:59 | I | current row num = 288
+24-11-25 12:36:59 | I | current row num = 320
+24-11-25 12:37:00 | I | current row num = 352
+24-11-25 12:37:01 | I | current row num = 384
+24-11-25 12:37:02 | I | current row num = 416
+24-11-25 12:37:03 | I | current row num = 448
+24-11-25 12:37:04 | I | current row num = 480
+24-11-25 12:37:07 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/3.jsonl 
+ ***
+24-11-25 12:37:07 | I | *** 
+ total_rows = 274 
+ ***
+24-11-25 12:37:07 | I | current row num = 0
+24-11-25 12:37:08 | I | current row num = 32
+24-11-25 12:37:09 | I | current row num = 64
+24-11-25 12:37:10 | I | current row num = 96
+24-11-25 12:37:12 | I | current row num = 128
+24-11-25 12:37:13 | I | current row num = 160
+24-11-25 12:37:13 | I | current row num = 192
+24-11-25 12:37:14 | I | current row num = 224
+24-11-25 12:37:16 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/4.jsonl 
+ ***
+24-11-25 12:37:16 | I | *** 
+ total_rows = 191 
+ ***
+24-11-25 12:37:16 | I | current row num = 0
+24-11-25 12:37:18 | I | current row num = 32
+24-11-25 12:37:19 | I | current row num = 64
+24-11-25 12:37:20 | I | current row num = 96
+24-11-25 12:37:22 | I | current row num = 128
+24-11-25 12:37:24 | I | current row num = 160
+24-11-25 12:37:26 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/5.jsonl 
+ ***
+24-11-25 12:37:26 | I | *** 
+ total_rows = 211 
+ ***
+24-11-25 12:37:26 | I | current row num = 0
+24-11-25 12:37:26 | I | current row num = 32
+24-11-25 12:37:27 | I | current row num = 64
+24-11-25 12:37:30 | I | current row num = 96
+24-11-25 12:37:31 | I | current row num = 128
+24-11-25 12:37:32 | I | current row num = 160
+24-11-25 12:37:32 | I | current row num = 192
+24-11-25 12:37:36 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/6.jsonl 
+ ***
+24-11-25 12:37:36 | I | *** 
+ total_rows = 241 
+ ***
+24-11-25 12:37:36 | I | current row num = 0
+24-11-25 12:37:36 | I | current row num = 32
+24-11-25 12:37:37 | I | current row num = 64
+24-11-25 12:37:38 | I | current row num = 96
+24-11-25 12:37:39 | I | current row num = 128
+24-11-25 12:37:41 | I | current row num = 160
+24-11-25 12:37:44 | I | current row num = 192
+24-11-25 12:37:46 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/7.jsonl 
+ ***
+24-11-25 12:37:46 | I | *** 
+ total_rows = 279 
+ ***
+24-11-25 12:37:46 | I | current row num = 0
+24-11-25 12:37:46 | I | current row num = 32
+24-11-25 12:37:47 | I | current row num = 64
+24-11-25 12:37:48 | I | current row num = 96
+24-11-25 12:37:49 | I | current row num = 128
+24-11-25 12:37:51 | I | current row num = 160
+24-11-25 12:37:52 | I | current row num = 192
+24-11-25 12:37:53 | I | current row num = 224
+24-11-25 12:37:55 | I | current row num = 256
+24-11-25 12:37:58 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/8.jsonl 
+ ***
+24-11-25 12:37:58 | I | *** 
+ total_rows = 186 
+ ***
+24-11-25 12:37:58 | I | current row num = 0
+24-11-25 12:37:59 | I | current row num = 32
+24-11-25 12:37:59 | I | current row num = 64
+24-11-25 12:38:00 | I | current row num = 96
+24-11-25 12:38:01 | I | current row num = 128
+24-11-25 12:38:04 | I | current row num = 160
+24-11-25 12:38:07 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/9.jsonl 
+ ***
+24-11-25 12:38:07 | I | *** 
+ total_rows = 770 
+ ***
+24-11-25 12:38:07 | I | current row num = 0
+24-11-25 12:38:08 | I | current row num = 32
+24-11-25 12:38:09 | I | current row num = 64
+24-11-25 12:38:10 | I | current row num = 96
+24-11-25 12:38:12 | I | current row num = 128
+24-11-25 12:38:15 | I | current row num = 160
+24-11-25 12:38:15 | I | current row num = 192
+24-11-25 12:38:16 | I | current row num = 224
+24-11-25 12:38:18 | I | current row num = 256
+24-11-25 12:38:19 | I | current row num = 288
+24-11-25 12:38:21 | I | current row num = 320
+24-11-25 12:38:22 | I | current row num = 352
+24-11-25 12:38:22 | I | current row num = 384
+24-11-25 12:38:25 | I | current row num = 416
+24-11-25 12:38:26 | I | current row num = 448
+24-11-25 12:38:27 | I | current row num = 480
+24-11-25 12:38:29 | I | current row num = 512
+24-11-25 12:38:30 | I | current row num = 544
+24-11-25 12:38:31 | I | current row num = 576
+24-11-25 12:38:32 | I | current row num = 608
+24-11-25 12:38:35 | I | current row num = 640
+24-11-25 12:38:36 | I | current row num = 672
+24-11-25 12:38:37 | I | current row num = 704
+24-11-25 12:38:38 | I | current row num = 736
+24-11-25 12:38:41 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/10.jsonl 
+ ***
+24-11-25 12:38:41 | I | *** 
+ total_rows = 271 
+ ***
+24-11-25 12:38:41 | I | current row num = 0
+24-11-25 12:38:41 | I | current row num = 32
+24-11-25 12:38:43 | I | current row num = 64
+24-11-25 12:38:44 | I | current row num = 96
+24-11-25 12:38:45 | I | current row num = 128
+24-11-25 12:38:46 | I | current row num = 160
+24-11-25 12:38:47 | I | current row num = 192
+24-11-25 12:38:48 | I | current row num = 224
+24-11-25 12:38:49 | I | current row num = 256
+24-11-25 12:38:50 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/11.jsonl 
+ ***
+24-11-25 12:38:50 | I | *** 
+ total_rows = 273 
+ ***
+24-11-25 12:38:50 | I | current row num = 0
+24-11-25 12:38:51 | I | current row num = 32
+24-11-25 12:38:52 | I | current row num = 64
+24-11-25 12:38:55 | I | current row num = 96
+24-11-25 12:38:57 | I | current row num = 128
+24-11-25 12:38:58 | I | current row num = 160
+24-11-25 12:39:00 | I | current row num = 192
+24-11-25 12:39:01 | I | current row num = 224
+24-11-25 12:39:03 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/12.jsonl 
+ ***
+24-11-25 12:39:03 | I | *** 
+ total_rows = 301 
+ ***
+24-11-25 12:39:03 | I | current row num = 0
+24-11-25 12:39:03 | I | current row num = 32
+24-11-25 12:39:04 | I | current row num = 64
+24-11-25 12:39:05 | I | current row num = 96
+24-11-25 12:39:07 | I | current row num = 128
+24-11-25 12:39:08 | I | current row num = 160
+24-11-25 12:39:10 | I | current row num = 192
+24-11-25 12:39:11 | I | current row num = 224
+24-11-25 12:39:12 | I | current row num = 256
+24-11-25 12:39:13 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/13.jsonl 
+ ***
+24-11-25 12:39:13 | I | *** 
+ total_rows = 239 
+ ***
+24-11-25 12:39:13 | I | current row num = 0
+24-11-25 12:39:14 | I | current row num = 32
+24-11-25 12:39:15 | I | current row num = 64
+24-11-25 12:39:16 | I | current row num = 96
+24-11-25 12:39:16 | I | current row num = 128
+24-11-25 12:39:17 | I | current row num = 160
+24-11-25 12:39:18 | I | current row num = 192
+24-11-25 12:39:19 | I | current row num = 224
+24-11-25 12:39:21 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/14.jsonl 
+ ***
+24-11-25 12:39:21 | I | *** 
+ total_rows = 262 
+ ***
+24-11-25 12:39:21 | I | current row num = 0
+24-11-25 12:39:21 | I | current row num = 32
+24-11-25 12:39:22 | I | current row num = 64
+24-11-25 12:39:23 | I | current row num = 96
+24-11-25 12:39:25 | I | current row num = 128
+24-11-25 12:39:26 | I | current row num = 160
+24-11-25 12:39:27 | I | current row num = 192
+24-11-25 12:39:28 | I | current row num = 224
+24-11-25 12:39:30 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/15.jsonl 
+ ***
+24-11-25 12:39:30 | I | *** 
+ total_rows = 253 
+ ***
+24-11-25 12:39:30 | I | current row num = 0
+24-11-25 12:39:30 | I | current row num = 32
+24-11-25 12:39:31 | I | current row num = 64
+24-11-25 12:39:32 | I | current row num = 96
+24-11-25 12:39:32 | I | current row num = 128
+24-11-25 12:39:33 | I | current row num = 160
+24-11-25 12:39:34 | I | current row num = 192
+24-11-25 12:39:35 | I | current row num = 224
+24-11-25 12:39:37 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/16.jsonl 
+ ***
+24-11-25 12:39:37 | I | *** 
+ total_rows = 523 
+ ***
+24-11-25 12:39:37 | I | current row num = 0
+24-11-25 12:39:39 | I | current row num = 32
+24-11-25 12:39:39 | I | current row num = 64
+24-11-25 12:39:41 | I | current row num = 96
+24-11-25 12:39:43 | I | current row num = 128
+24-11-25 12:39:46 | I | current row num = 160
+24-11-25 12:39:47 | I | current row num = 192
+24-11-25 12:39:49 | I | current row num = 224
+24-11-25 12:39:50 | I | current row num = 256
+24-11-25 12:39:53 | I | current row num = 288
+24-11-25 12:39:55 | I | current row num = 320
+24-11-25 12:39:56 | I | current row num = 352
+24-11-25 12:39:57 | I | current row num = 384
+24-11-25 12:40:00 | I | current row num = 416
+24-11-25 12:40:00 | I | current row num = 448
+24-11-25 12:40:01 | I | current row num = 480
+24-11-25 12:40:03 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/17.jsonl 
+ ***
+24-11-25 12:40:03 | I | *** 
+ total_rows = 251 
+ ***
+24-11-25 12:40:03 | I | current row num = 0
+24-11-25 12:40:05 | I | current row num = 32
+24-11-25 12:40:06 | I | current row num = 64
+24-11-25 12:40:07 | I | current row num = 96
+24-11-25 12:40:10 | I | current row num = 128
+24-11-25 12:40:11 | I | current row num = 160
+24-11-25 12:40:13 | I | current row num = 192
+24-11-25 12:40:14 | I | current row num = 224
+24-11-25 12:40:17 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/18.jsonl 
+ ***
+24-11-25 12:40:17 | I | *** 
+ total_rows = 274 
+ ***
+24-11-25 12:40:17 | I | current row num = 0
+24-11-25 12:40:18 | I | current row num = 32
+24-11-25 12:40:19 | I | current row num = 64
+24-11-25 12:40:19 | I | current row num = 96
+24-11-25 12:40:20 | I | current row num = 128
+24-11-25 12:40:21 | I | current row num = 160
+24-11-25 12:40:22 | I | current row num = 192
+24-11-25 12:40:23 | I | current row num = 224
+24-11-25 12:40:24 | I | current row num = 256
+24-11-25 12:40:26 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/19.jsonl 
+ ***
+24-11-25 12:40:26 | I | *** 
+ total_rows = 315 
+ ***
+24-11-25 12:40:26 | I | current row num = 0
+24-11-25 12:40:26 | I | current row num = 32
+24-11-25 12:40:27 | I | current row num = 64
+24-11-25 12:40:29 | I | current row num = 96
+24-11-25 12:40:30 | I | current row num = 128
+24-11-25 12:40:31 | I | current row num = 160
+24-11-25 12:40:32 | I | current row num = 192
+24-11-25 12:40:33 | I | current row num = 224
+24-11-25 12:40:35 | I | current row num = 256
+24-11-25 12:40:36 | I | current row num = 288
+24-11-25 12:40:37 | I | current row num = 320
+24-11-25 12:40:38 | I | loading train data for epoch 1
+24-11-25 12:40:40 | I | *** 
+ now in /data/gyy/YOCO/data_without_preprocess/shard/val/0.jsonl 
+ ***
+24-11-25 12:40:40 | I | *** 
+ total_rows = 700 
+ ***
+24-11-25 12:40:40 | I | current row num = 0
+24-11-25 12:40:40 | I | in forward_and_gen_args_and_kwargs, Start iterating over samples
+24-11-25 12:40:40 | I | No existing checkpoint found checkpoints/checkpoint_last.pt
+24-11-25 12:40:40 | I | loading train data for epoch 1
+24-11-25 12:40:41 | I | loading valid data for epoch 1
+24-11-25 12:40:58 | I | begin training epoch 1
+24-11-25 12:40:58 | I | Start iterating over samples
+24-11-25 12:40:58 | I | TRAIN CURRENT LAYER_IDX = 0
+24-11-25 12:40:58 | I | in layer model.layers.0

@@ -1,0 +1,39 @@
+[
+    
+    "/data/gyy/lmquant-main/lmquant/data/data_with_preprocess_llama_7b",
+    "--wandb-project", "layer_wise_quant",
+    "--save-interval-updates", "1000",
+    "--no-epoch-checkpoints",
+    "--task", "kd",
+    "--arch", "llama_for_layer_wise_qat",
+    "--no-save",
+    "--pad-to-max-len",
+    "--optimizer", "adam",
+    "--adam-betas", "(0.9, 0.95)",
+    "--adam-eps", "1e-06",
+    "--clip-norm", "2.0",
+    "--lr-scheduler", "polynomial_decay",
+    "--warmup-updates", "50",
+    "--weight-decay", "0.05",
+    "--tiktoken-model", "cl100k_base",
+    "--memory-efficient-fp16",
+    "--quant-acts-when-training",
+    "--total-num-update", "300000",
+    "--log-format", "simple",
+    "--log-interval", "1",
+    "--batch-read-ahead", "1",
+    "--best-checkpoint-metric", "loss_valid",
+
+
+    "--criterion", "mse",
+    
+
+    "--tokens-per-sample", "512",
+    "--tokenizer-pad-to-multiple", "1",
+    "--batch-size", "32",
+    "--max-update", "100",
+    "--model-parallel-size", "1",
+    "--update-freq", "2",
+    "--validate-interval-updates", "20"
+
+]
